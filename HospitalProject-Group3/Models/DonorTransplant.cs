@@ -10,7 +10,7 @@ namespace HospitalProject_Group3.Models
     public class DonorTransplant
     {
         [Key]
-        public int DonorID { get; set; }
+        public int DonorTransplantID { get; set; }
         public string OrganType { get; set; }
         public string SurgeryPlan { get; set; }
         public string WaitListNumber { get; set; }
@@ -23,7 +23,7 @@ namespace HospitalProject_Group3.Models
 
     public class DonorTransplantDto
     {
-        public int DonorID { get; set; }
+        public int DonorTransplantID { get; set; }
         public string OrganType { get; set; }
         public string SurgeryPlan { get; set; }
         public string WaitListNumber { get; set; }

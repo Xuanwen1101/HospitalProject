@@ -195,6 +195,14 @@
     <Compile Include="Migrations\202207050301456_entities.designer.cs">
       <DependentUpon>202207050301456_entities.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202207061345104_donor.cs" />
+    <Compile Include="Migrations\202207061345104_donor.designer.cs">
+      <DependentUpon>202207061345104_donor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202207061349322_donorTransplant.cs" />
+    <Compile Include="Migrations\202207061349322_donorTransplant.designer.cs">
+      <DependentUpon>202207061349322_donorTransplant.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Appointment.cs" />
@@ -295,6 +303,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202207050301456_entities.resx">
       <DependentUpon>202207050301456_entities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207061345104_donor.resx">
+      <DependentUpon>202207061345104_donor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202207061349322_donorTransplant.resx">
+      <DependentUpon>202207061349322_donorTransplant.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
