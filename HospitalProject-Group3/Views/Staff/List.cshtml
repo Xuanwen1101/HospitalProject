@@ -1,0 +1,26 @@
+﻿
+@model IEnumerable<HospitalProject_Group3.Models.StaffDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List of Staffs</h2>
+
+<div>
+    <a class="navlink" href="/Staff/New">Add a New Staff</a>
+</div>
+
+@*<div>There are @Model.Count() staffs in the system.</div>*@
+
+
+<div id="containerlist">
+    @foreach (var staff in Model)
+    {
+        <h2><a href="/Staff/Details/@staff.StaffID">@staff.StaffFName @staff.StaffLName</a></h2>
+        <div>Release Date: @staff.HireDate.ToString("yyyy-MM-dd")</div>
+        <div>Role Type: @staff.RoleType</div>
+
+
+    }
+</div>
+

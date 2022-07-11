@@ -1,0 +1,20 @@
+﻿@model IEnumerable<HospitalProject_Group3.Models.ShiftDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List of Shifts</h2>
+
+<div>
+    <a class="navlink" href="/Shift/New">Add a New Shift</a>
+</div>
+
+
+<div id="containerlist">
+    @foreach (var shift in Model)
+    {
+        <h2><a href="/Shift/Details/@shift.ShiftID"> @shift.ShiftDay @shift.ShiftTime</a></h2>
+
+    }
+</div>
+

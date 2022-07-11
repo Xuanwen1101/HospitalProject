@@ -49,6 +49,9 @@ namespace HospitalProject_Group3.Models
         public string Email { get; set; }
         public DateTime HireDate { get; set; }
 
+        public int RoleID { get; set; }
+        public string RoleType { get; set; }
+
         //data needed for keeping track of Staff images uploaded
         //images deposited into /Content/Images/Staffs/{id}.{extension}
         public bool StaffHasPhoto { get; set; }
