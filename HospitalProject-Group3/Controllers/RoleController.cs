@@ -76,72 +76,162 @@ namespace HospitalProject_Group3.Controllers
         // GET: Role/Details/5
         public ActionResult Details(int id)
         {
+            DetailsRole ViewModel = new DetailsRole();
+
+            string url = "RoleData/FindRole/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            RoleDto SelectedRole = response.Content.ReadAsAsync<RoleDto>().Result;
+
+            ViewModel.SelectedRole = SelectedRole;
+
+
+            url = "StaffData/ListStaffsForRole/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<StaffDto> workedStaffs = response.Content.ReadAsAsync<IEnumerable<StaffDto>>().Result;
+
+            ViewModel.WorkedStaffs = workedStaffs;
+
+
+            return View(ViewModel);
+        }
+
+
+        public ActionResult Error()
+        {
+
             return View();
         }
 
-        // GET: Role/Create
-        public ActionResult Create()
+
+        // GET: Role/New
+        /*[Authorize]*/
+        public ActionResult New()
         {
+            /*
+            string url = "DepartmentData/ListDepartments";
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            IEnumerable<DepartmentDto> DepartmentOptions = response.Content.ReadAsAsync<IEnumerable<DepartmentDto>>().Result;
+
+            return View(DepartmentOptions);
+            */
+
             return View();
         }
 
         // POST: Role/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        /*[Authorize]*/
+        public ActionResult Create(Role role)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            GetApplicationCookie();//get token credentials
+            //objective: add a new role into our system using the API
+            //curl -H "Content-Type:application/json" -d @role.json https://localhost:44342/api/RoleData/AddRole 
+            string url = "RoleData/AddRole";
 
-                return RedirectToAction("Index");
-            }
-            catch
+
+            string jsonPayload = jss.Serialize(role);
+
+            Debug.WriteLine("the json payload is :", jsonPayload);
+
+            HttpContent content = new StringContent(jsonPayload);
+            content.Headers.ContentType.MediaType = "application/json";
+
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
+
 
         // GET: Role/Edit/5
+        /*[Authorize]*/
         public ActionResult Edit(int id)
         {
-            return View();
+            UpdateRole ViewModel = new UpdateRole();
+
+            //get the existing role information
+            //curl https://localhost:44349/api/RoleData/FindRole/{id}
+            string url = "RoleData/FindRole/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            RoleDto SelectedRole = response.Content.ReadAsAsync<RoleDto>().Result;
+            ViewModel.SelectedRole = SelectedRole;
+
+            /*
+            url = "DepartmentData/ListDepartments/";
+            response = client.GetAsync(url).Result;
+            IEnumerable<DepartmentDto> departmentOptions = response.Content.ReadAsAsync<IEnumerable<DepartmentDto>>().Result;
+
+            ViewModel.DepartmentOptions = departmentOptions;
+            */
+
+            return View(ViewModel);
         }
 
-        // POST: Role/Edit/5
+
+        // POST: Role/Update/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        /*[Authorize]*/
+        public ActionResult Update(int id, Role role)
         {
-            try
-            {
-                // TODO: Add update logic here
+            GetApplicationCookie();//get token credentials
 
-                return RedirectToAction("Index");
-            }
-            catch
+            string url = "RoleData/UpdateRole/" + id;
+            string jsonPayload = jss.Serialize(role);
+
+            HttpContent content = new StringContent(jsonPayload);
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            Debug.WriteLine(content);
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
 
-        // GET: Role/Delete/5
-        public ActionResult Delete(int id)
+        // GET: Role/DeleteConfirm/5
+        /*[Authorize]*/
+        public ActionResult DeleteConfirm(int id)
         {
-            return View();
+            // get the existing role information
+            //curl https://localhost:44342/api/RoleData/FindRole/{id}
+            string url = "RoleData/FindRole/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            RoleDto selectedRole = response.Content.ReadAsAsync<RoleDto>().Result;
+
+            return View(selectedRole);
+
         }
 
         // POST: Role/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        /*[Authorize]*/
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            GetApplicationCookie();//get token credentials
+            //objective: delete the selected role from our system using the API
+            //curl -d "" https://localhost:44342/api/RoleData/DeleteRole/{id}
+            string url = "RoleData/DeleteRole/" + id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
     }

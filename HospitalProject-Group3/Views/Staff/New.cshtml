@@ -1,0 +1,46 @@
+﻿@model IEnumerable<HospitalProject_Group3.Models.RoleDto>
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>Add New Staff</h2>
+
+<form action="/Staff/Create" method="POST">
+    <div>
+        <label>First Name:</label> <input type="text" name="StaffFName" />
+    </div>
+    <div>
+        <label>Last Name:</label> <input type="text" name="StaffLName" />
+    </div>
+    <div>
+        <label>Staff Bio:</label>
+    </div>
+    <div>
+        <textarea name="StaffBio" rows="5" cols="30" maxlength="500" placeholder="Type here..."></textarea>
+    </div>
+    <div>
+        <label>Role Type:</label>
+
+        <select name="RoleID">
+            @foreach (var role in Model)
+            {
+                <option value="@role.RoleID">@role.RoleType</option>
+
+            }
+        </select>
+    </div>
+    <div>
+        <label>Hire Date:</label> <input type="date" name="HireDate" />
+    </div>
+    <div>
+        <label>Phone Number:</label> <input type="text" name="PhoneNumber" />
+    </div>
+    <div>
+        <label>Email:</label> <input type="text" name="Email" />
+    </div>
+    <div>
+        <input type="submit" value="Add Staff" />
+
+    </div>
+</form>
+

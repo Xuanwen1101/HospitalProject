@@ -76,73 +76,145 @@ namespace HospitalProject_Group3.Controllers
         // GET: Shift/Details/5
         public ActionResult Details(int id)
         {
+            DetailsShift ViewModel = new DetailsShift();
+
+            string url = "ShiftData/FindShift/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            ShiftDto SelectedShift = response.Content.ReadAsAsync<ShiftDto>().Result;
+
+            ViewModel.SelectedShift = SelectedShift;
+
+
+            url = "StaffData/ListStaffsForShift/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<StaffDto> workedStaffs = response.Content.ReadAsAsync<IEnumerable<StaffDto>>().Result;
+
+            ViewModel.WorkedStaffs = workedStaffs;
+
+
+            return View(ViewModel);
+        }
+
+
+        public ActionResult Error()
+        {
+
             return View();
         }
 
-        // GET: Shift/Create
-        public ActionResult Create()
+
+        // GET: Shift/New
+        /*[Authorize]*/
+        public ActionResult New()
         {
             return View();
         }
 
         // POST: Shift/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        /*[Authorize]*/
+        public ActionResult Create(Shift shift)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            GetApplicationCookie();//get token credentials
 
-                return RedirectToAction("Index");
-            }
-            catch
+            string url = "ShiftData/AddShift";
+            string jsonPayload = jss.Serialize(shift);
+
+            Debug.WriteLine("the json payload is :", jsonPayload);
+
+            HttpContent content = new StringContent(jsonPayload);
+            content.Headers.ContentType.MediaType = "application/json";
+
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
+
 
         // GET: Shift/Edit/5
+        /*[Authorize]*/
         public ActionResult Edit(int id)
         {
-            return View();
+            UpdateShift ViewModel = new UpdateShift();
+
+            //get the existing shift information
+            //curl https://localhost:44342/api/ShiftData/FindShift/{id}
+            string url = "ShiftData/FindShift/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            ShiftDto SelectedShift = response.Content.ReadAsAsync<ShiftDto>().Result;
+            ViewModel.SelectedShift = SelectedShift;
+
+
+            return View(ViewModel);
         }
 
-        // POST: Shift/Edit/5
+        // POST: Shift/Update/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        /*[Authorize]*/
+        public ActionResult Update(int id, Shift shift)
         {
-            try
-            {
-                // TODO: Add update logic here
+            GetApplicationCookie();//get token credentials
 
-                return RedirectToAction("Index");
-            }
-            catch
+            string url = "ShiftData/UpdateShift/" + id;
+            string jsonPayload = jss.Serialize(shift);
+
+            HttpContent content = new StringContent(jsonPayload);
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            Debug.WriteLine(content);
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
 
-        // GET: Shift/Delete/5
-        public ActionResult Delete(int id)
+        // GET: Shift/DeleteConfirm/5
+        /*[Authorize]*/
+        public ActionResult DeleteConfirm(int id)
         {
-            return View();
+            // get the existing shift information
+            //curl https://localhost:44342/api/ShiftData/FindShift/{id}
+            string url = "ShiftData/FindShift/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            ShiftDto selectedShift = response.Content.ReadAsAsync<ShiftDto>().Result;
+
+            return View(selectedShift);
+
         }
 
         // POST: Shift/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        /*[Authorize]*/
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            GetApplicationCookie();//get token credentials
+            //objective: delete the selected shift from our system using the API
+            //curl -d "" https://localhost:44342/api/ShiftData/DeleteShift/{id}
+            string url = "ShiftData/DeleteShift/" + id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
+
     }
 }

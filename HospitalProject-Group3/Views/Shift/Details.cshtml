@@ -1,0 +1,33 @@
+﻿@model HospitalProject_Group3.Models.ViewModels.DetailsShift
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Shift's Details</h2>
+
+<div>
+    <a class="navlink" href="/Shift/List">Back To Shifts' List</a>
+</div>
+<div>
+    <a style="color: #ec3838;" href="/Shift/DeleteConfirm/@Model.SelectedShift.ShiftID">Delete This Shift</a>
+</div>
+<div>
+    <a style="color: #8338ec;" href="/Shift/Edit/@Model.SelectedShift.ShiftID">Update This Shift</a>
+</div>
+
+<div id="containershow">
+    <h2 style="color: #0a9396 ">@Model.SelectedShift.ShiftDay @Model.SelectedShift.ShiftTime</h2>
+    
+
+    <div style="margin-top:100px;">
+        <h3>Staffs worked at <span style="color: #0a9396 ">@Model.SelectedShift.ShiftDay @Model.SelectedShift.ShiftTime</span>:</h3>
+        @foreach (var staff in Model.WorkedStaffs)
+        {
+            <div>
+                <a href="/Staff/Details/@staff.StaffID">@staff.StaffFName @staff.StaffLName</a>
+            </div>
+        }
+    </div>
+
+</div>
+

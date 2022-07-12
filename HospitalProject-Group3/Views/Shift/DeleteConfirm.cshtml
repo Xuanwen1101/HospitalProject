@@ -1,0 +1,21 @@
+﻿@model HospitalProject_Group3.Models.ShiftDto
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+<h2>Are you sure you want to delete @Model.ShiftDay @Model.ShiftTime?</h2>
+
+<p>This action cannot be undone.</p>
+
+<nav>
+    <a class="navlink" href="/Shift/Details/@Model.ShiftID">Cancel</a>
+</nav>
+
+<form method="POST" action="/Shift/Delete/@Model.ShiftID">
+
+    <button class="delbutton">
+        Confirm Delete
+    </button>
+
+</form>
+

@@ -1,0 +1,80 @@
+﻿@model HospitalProject_Group3.Models.ViewModels.DetailsStaff
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Staff's Details</h2>
+
+<div>
+    <a class="navlink" href="/Staff/List">Back To Staffs' List</a>
+</div>
+<div>
+    <a style="color: #ec3838;" href="/Staff/DeleteConfirm/@Model.SelectedStaff.StaffID">Delete This Staff</a>
+</div>
+<div>
+    <a style="color: #8338ec;" href="/Staff/Edit/@Model.SelectedStaff.StaffID">Update This Staff</a>
+</div>
+
+<div id="containershow">
+    <h2 style="color: #0a9396 ">@Model.SelectedStaff.StaffFName @Model.SelectedStaff.StaffLName</h2>
+    @{
+        // image token from: https://www.pngegg.com/en/png-zrgjn
+        string imageurl = "/Content/Images/Staffs/default.png";
+        if (Model.SelectedStaff.StaffHasPhoto)
+        {
+            imageurl = "/Content/Images/Staffs/" + Model.SelectedStaff.StaffID + "." + Model.SelectedStaff.PicExtension;
+        }
+    }
+    <div><img src="@imageurl" width="300" alt="@Model.SelectedStaff.StaffFName @Model.SelectedStaff.StaffLName" /></div>
+    <div><label>Bio:</label> @Model.SelectedStaff.StaffBio</div>
+    <div><label>Hire Date:</label> @Model.SelectedStaff.HireDate.ToString("yyyy-MM-dd")</div>
+    <div><label>PhoneNumber:</label> @Model.SelectedStaff.PhoneNumber</div>
+    <div><label>Email:</label> @Model.SelectedStaff.Email</div>
+
+    <div><label>Role Type:</label> <a href="/Role/Details/@Model.SelectedStaff.RoleID"> @Model.SelectedStaff.RoleType</a></div>
+
+    <div>
+        <h2>Shifts are showing <span style="color: #0a9396 ">@Model.SelectedStaff.StaffFName @Model.SelectedStaff.StaffLName</span>:</h2>
+        @foreach (var shift in Model.WorkingingShifts)
+        {
+            <div>
+                <a href="/Shift/Details/@shift.ShiftID">@shift.ShiftDay @shift.ShiftTime</a> <a style="color:#ab2020;" href="/Staff/Unassociate/@Model.SelectedStaff.StaffID?ShiftID=@shift.ShiftID">[x]</a>
+            </div>
+        }
+
+        <div>
+            <h4>Add new Shift to show this Staff</h4>
+            <form method="POST" action="/Staff/Associate/@Model.SelectedStaff.StaffID">
+                <select name="ShiftID">
+                    @foreach (var shift in Model.AvailableShifts)
+                    {
+                        <option value="@shift.ShiftID">@shift.ShiftDay @shift.ShiftTime</option>
+                    }
+
+                </select>
+                <input type="submit" value="Associate Shift" />
+            </form>
+        </div>
+    </div>
+
+    <div style="margin-top:100px;">
+        <h3>Appointments had by <span style="color: #0a9396 ">@Model.SelectedStaff.StaffFName @Model.SelectedStaff.StaffLName</span>:</h3>
+        @*@foreach (var appointment in Model.HadAppointments)
+        {
+            <div>
+                <a href="/Staff/Details/@appointment.AppointmentID">@appointment.AppointmentID</a>
+            </div>
+        }*@
+    </div>
+
+    <div style="margin-top:100px;">
+        <h3>Prescriptions created by <span style="color: #0a9396 ">@Model.SelectedStaff.StaffFName @Model.SelectedStaff.StaffLName</span>:</h3>
+       @* @foreach (var prescription in Model.CreatedPrescriptions)
+        {
+            <div>
+                <a href="/Staff/Details/@prescription.PrescriptionID">@prescription.PrescriptionID</a>
+            </div>
+        }*@
+    </div>
+
+</div>

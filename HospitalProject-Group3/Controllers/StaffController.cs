@@ -75,73 +75,238 @@ namespace HospitalProject_Group3.Controllers
         // GET: Staff/Details/5
         public ActionResult Details(int id)
         {
+            DetailsStaff ViewModel = new DetailsStaff();
+
+            //objective: communicate with the data api to retrieve the selected Staff info
+            //curl https://localhost:44342/api/StaffData/FindStaff/{id}
+
+            string url = "StaffData/FindStaff/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            StaffDto selectedStaff = response.Content.ReadAsAsync<StaffDto>().Result;
+
+            ViewModel.SelectedStaff = selectedStaff;
+
+            //show associated Shifts with this Staff
+            url = "ShiftData/ListShiftsWorkingForStaff/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<ShiftDto> workingingShifts = response.Content.ReadAsAsync<IEnumerable<ShiftDto>>().Result;
+
+            ViewModel.WorkingingShifts = workingingShifts;
+
+            url = "ShiftData/ListShiftsNotWorkingForStaff/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<ShiftDto> availableShifts = response.Content.ReadAsAsync<IEnumerable<ShiftDto>>().Result;
+
+            ViewModel.AvailableShifts = availableShifts;
+
+
+            /*
+            url = "AppointmentData/ListAppointmentsForStaff/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<AppointmentDto> hadAppointments = response.Content.ReadAsAsync<IEnumerable<AppointmentDto>>().Result;
+
+            ViewModel.HadAppointments = hadAppointments;
+
+            url = "PrescriptionData/ListPrescriptionsForStaff/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<PrescriptionDto> createdPrescriptions = response.Content.ReadAsAsync<IEnumerable<PrescriptionDto>>().Result;
+
+            ViewModel.CreatedPrescriptions = createdPrescriptions;
+            */
+
+
+            return View(ViewModel);
+
+        }
+
+
+        //POST: Staff/Associate/{staffId}
+        [HttpPost]
+        /*[Authorize]*/
+        public ActionResult Associate(int id, int ShiftID)
+        {
+            GetApplicationCookie();//get token credentials
+            //Debug.WriteLine("Attempting to associate staff :" + id + " with shift " + ShiftID);
+
+            //associate staff with shift
+            string url = "StaffData/AssociateStaffWithShift/" + id + "/" + ShiftID;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            return RedirectToAction("Details/" + id);
+        }
+
+
+        //Get: Staff/UnAssociate/{id}?ShiftID={shiftID}
+        [HttpGet]
+        /*[Authorize]*/
+        public ActionResult UnAssociate(int id, int ShiftID)
+        {
+            GetApplicationCookie();//get token credentials
+            //Debug.WriteLine("Attempting to unassociate staff :" + id + " with shift: " + ShiftID);
+
+            //unassociate staff with shift
+            string url = "StaffData/UnAssociateStaffWithShift/" + id + "/" + ShiftID;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
+            return RedirectToAction("Details/" + id);
+        }
+
+
+        public ActionResult Error()
+        {
+
             return View();
         }
 
-        // GET: Staff/Create
-        public ActionResult Create()
+
+        // GET: Staff/New
+        /*[Authorize]*/
+        public ActionResult New()
         {
-            return View();
+            string url = "RoleData/ListRoles";
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            IEnumerable<RoleDto> RoleOptions = response.Content.ReadAsAsync<IEnumerable<RoleDto>>().Result;
+
+            return View(RoleOptions);
         }
 
         // POST: Staff/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        /*[Authorize]*/
+        public ActionResult Create(Staff staff)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            GetApplicationCookie();//get token credentials
+            //objective: add a new staff into our system using the API
+            //curl -H "Content-Type:application/json" -d @staff.json https://localhost:44342/api/StaffData/AddStaff 
+            string url = "StaffData/AddStaff";
 
-                return RedirectToAction("Index");
-            }
-            catch
+
+            string jsonPayload = jss.Serialize(staff);
+
+            Debug.WriteLine("the json payload is :", jsonPayload);
+
+            HttpContent content = new StringContent(jsonPayload);
+            content.Headers.ContentType.MediaType = "application/json";
+
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
 
         // GET: Staff/Edit/5
+        /*[Authorize]*/
         public ActionResult Edit(int id)
         {
-            return View();
+            UpdateStaff ViewModel = new UpdateStaff();
+
+            //get the existing staff information
+            //curl https://localhost:44342/api/StaffData/FindStaff/{id}
+            string url = "StaffData/FindStaff/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            StaffDto SelectedStaff = response.Content.ReadAsAsync<StaffDto>().Result;
+            ViewModel.SelectedStaff = SelectedStaff;
+
+            //all roles to choose from when updating this staff
+            //the existing Role Options
+            url = "RoleData/ListRoles/";
+            response = client.GetAsync(url).Result;
+            IEnumerable<RoleDto> roleOptions = response.Content.ReadAsAsync<IEnumerable<RoleDto>>().Result;
+
+            ViewModel.RoleOptions = roleOptions;
+
+            return View(ViewModel);
         }
 
-        // POST: Staff/Edit/5
+        // POST: Staff/Update/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        /*[Authorize]*/
+        public ActionResult Update(int id, Staff staff, HttpPostedFileBase StaffPicture)
         {
-            try
-            {
-                // TODO: Add update logic here
+            GetApplicationCookie();//get token credentials
+            //objective: update the selected staff into our system using the API
+            //curl -H "Content-Type:application/json" -d @staff.json  https://localhost:44342/api/StaffData/UpdateStaff/{id}
+            string url = "StaffData/UpdateStaff/" + id;
+            string jsonPayload = jss.Serialize(staff);
 
-                return RedirectToAction("Index");
-            }
-            catch
+            HttpContent content = new StringContent(jsonPayload);
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            Debug.WriteLine(content);
+
+            //update request is successful, and we have image data
+            if (response.IsSuccessStatusCode && StaffPicture != null)
             {
-                return View();
+                //Updating the Staff picture as a separate request
+                Debug.WriteLine("Calling Update Image method.");
+                //Send over image data for player
+                url = "StaffData/UploadStaffPicture/" + id;
+
+                MultipartFormDataContent requestcontent = new MultipartFormDataContent();
+                HttpContent imagecontent = new StreamContent(StaffPicture.InputStream);
+                requestcontent.Add(imagecontent, "StaffPicture", StaffPicture.FileName);
+                response = client.PostAsync(url, requestcontent).Result;
+
+                return RedirectToAction("List");
             }
+            else if (response.IsSuccessStatusCode)
+            {
+                //No image upload, but update still successful
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+
         }
 
-        // GET: Staff/Delete/5
-        public ActionResult Delete(int id)
+        // GET: Staff/DeleteConfirm/5
+        /*[Authorize]*/
+        public ActionResult DeleteConfirm(int id)
         {
-            return View();
+            // get the existing staff information
+            //curl https://localhost:44342/api/StaffData/FindStaff/{id}
+            string url = "StaffData/FindStaff/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            StaffDto selectedStaff = response.Content.ReadAsAsync<StaffDto>().Result;
+
+            return View(selectedStaff);
+
         }
 
         // POST: Staff/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        /*[Authorize]*/
+        public ActionResult Delete(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            GetApplicationCookie();//get token credentials
+            //objective: delete the selected staff from our system using the API
+            //curl -d "" https://localhost:44342/api/StaffData/DeleteStaff/{id}
+            string url = "StaffData/DeleteStaff/" + id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (response.IsSuccessStatusCode)
             {
-                return View();
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
             }
         }
+
     }
 }

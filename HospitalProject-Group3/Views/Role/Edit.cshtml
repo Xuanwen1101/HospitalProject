@@ -1,0 +1,41 @@
+﻿@model HospitalProject_Group3.Models.ViewModels.UpdateRole
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Update Role</h2>
+<form action="/Role/Update/@Model.SelectedRole.RoleID" method="POST" enctype="multipart/form-data">
+    <div style="display:none;">
+        @* Pass through the Role ID *@
+        <input type="text" name="RoleID" value="@Model.SelectedRole.RoleID" />
+    </div>
+    <div>
+        <label>RoleType:</label> <input type="text" name="RoleType" value="@Model.SelectedRole.RoleType" />
+    </div>
+    
+    <div>
+        <label>Department Name:</label>
+
+        @*<select name="DepartmentID">
+            @foreach (var department in Model.DepartmentOptions)
+            {
+                string selected = "";
+                if (department.DepartmentID == Model.SelectedRole.DepartmentID)
+                {
+                    selected = "selected";
+                }
+                <option value="@department.DepartmentID" @selected>@department.DepartmentName</option>
+
+            }
+        </select>*@
+    </div>
+    
+    <div>
+        <input type="submit" value="Update Role" />
+
+    </div>
+</form>
+<div style="margin-top:50px;">
+    <a class="navlink" href="/Role/Details/@Model.SelectedRole.RoleID">Back to The Role's Detail</a>
+</div>
+

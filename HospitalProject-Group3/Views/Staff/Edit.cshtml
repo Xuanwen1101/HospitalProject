@@ -1,0 +1,61 @@
+﻿@model HospitalProject_Group3.Models.ViewModels.UpdateStaff
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Update Staff</h2>
+<form action="/Staff/Update/@Model.SelectedStaff.StaffID" method="POST" enctype="multipart/form-data">
+    <div style="display:none;">
+        @* Pass through the Staff ID *@
+        <input type="text" name="StaffID" value="@Model.SelectedStaff.StaffID" />
+    </div>
+    <div>
+        <label>First Name:</label> <input type="text" name="StaffFName" value="@Model.SelectedStaff.StaffFName" />
+    </div>
+    <div>
+        <label>Last Name:</label> <input type="text" name="StaffLName" value="@Model.SelectedStaff.StaffLName" />
+    </div>
+    <div>
+        <label>Staff Bio:</label>
+    </div>
+    <div>
+        <textarea name="StaffBio" rows="5" cols="30" maxlength="500" placeholder="Type here...">@Model.SelectedStaff.StaffBio</textarea>
+    </div>
+    <div>
+        <label>Role:</label>
+
+        <select name="RoleID">
+            @foreach (var role in Model.RoleOptions)
+            {
+                string selected = "";
+                if (role.RoleID == Model.SelectedStaff.RoleID)
+                {
+                    selected = "selected";
+                }
+                <option value="@role.RoleID" @selected>@role.RoleType</option>
+
+            }
+        </select>
+    </div>
+    <div>
+        <label>Hire Date:</label> <input type="date" name="HireDate" value="@Model.SelectedStaff.HireDate.ToString("yyyy-MM-dd")" />
+    </div>
+    <div>
+        <label>Phone Number:</label> <input type="text" name="PhoneNumber" value="@Model.SelectedStaff.PhoneNumber" />
+    </div>
+    <div>
+        <label>Email:</label> <input type="text" name="Email" value="@Model.SelectedStaff.Email" />
+    </div>
+
+    <div style="padding-top: 10px; padding-bottom: 20px; ">
+        <input type="file" name="StaffPicture" />
+    </div>
+    <div>
+        <input type="submit" value="Update Staff" />
+
+    </div>
+</form>
+<div style="margin-top:50px;">
+    <a class="navlink" href="/Staff/Details/@Model.SelectedStaff.StaffID">Back to The Staff's Detail</a>
+</div>
+

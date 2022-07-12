@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>Add New Shift</h2>
+
+<form action="/Shift/Create" method="POST">
+    <div>
+        <label>Shift Day:</label>
+    </div>
+    <div>
+        <select name="ShiftDay">
+
+            <option value="Monday">Monday</option>
+            <option value="Tuesday">Tuesday</option>
+            <option value="Wednesday">Wednesday</option>
+            <option value="Thursday">Thursday</option>
+            <option value="Friday">Friday</option>
+            <option value="Saturday">Saturday</option>
+            <option value="Sunday">Sunday</option>
+
+        </select>
+    </div>
+    <div>
+        <label>Shift Time:</label>
+    </div>
+    <div>
+        <select name="ShiftTime">
+
+            <option value="Morning">Morning</option>
+            <option value="Afternoon">Afternoon</option>
+            <option value="Evening">Evening</option>
+            <option value="Midnight">Midnight</option>
+
+        </select>
+    </div>
+
+    <div>
+        <input type="submit" value="Add Shift" />
+
+    </div>
+</form>
+
