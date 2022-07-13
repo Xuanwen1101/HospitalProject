@@ -1,0 +1,21 @@
+﻿@model IEnumerable<HospitalProject_Group3.Models.MedicationDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List of Medication</h2>
+
+<div>
+    <a class="navlink" href="/Medication/New">Add a New Medication</a>
+</div>
+
+
+<div id="containerlist">
+    @foreach (var Medication in Model)
+    {
+        <h3><a href="/Medication/Details/@Medication.MedicationID"> @Medication.MedicationName</a></h3>
+        <p>Brand: @Medication.MedicationBrand</p>
+        <p>Price: @Medication.Price</p>
+    }
+</div>
+

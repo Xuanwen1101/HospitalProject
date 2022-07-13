@@ -1,0 +1,20 @@
+﻿@model IEnumerable<HospitalProject_Group3.Models.InsuranceDto>
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>Add New Insurance</h2>
+
+<form action="/Insurance/Create" method="POST">
+    <div>
+        <label>Company:</label> <input type="text" name="Company" />
+    </div>
+    <div>
+        <label>Plan:</label> <input type="text" name="InsurancePlan" />
+    </div>
+    <div>
+        <input type="submit" value="Add Insurance" />
+
+    </div>
+</form>
+
