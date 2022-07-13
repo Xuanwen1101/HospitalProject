@@ -229,6 +229,7 @@
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Shift.cs" />
     <Compile Include="Models\Staff.cs" />
+    <Compile Include="Models\ViewModels\DetailsMedication.cs" />
     <Compile Include="Models\ViewModels\DetailsRole.cs" />
     <Compile Include="Models\ViewModels\DetailsShift.cs" />
     <Compile Include="Models\ViewModels\DetailsStaff.cs" />
@@ -318,6 +319,8 @@
     <Content Include="Views\Insurance\Error.cshtml" />
     <Content Include="Views\Insurance\List.cshtml" />
     <Content Include="Views\Insurance\New.cshtml" />
+    <Content Include="Views\Medication\Details.cshtml" />
+    <Content Include="Views\Medication\DeleteConfirm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
