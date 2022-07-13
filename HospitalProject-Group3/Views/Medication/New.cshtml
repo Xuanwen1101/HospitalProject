@@ -1,0 +1,29 @@
+﻿@model IEnumerable<HospitalProject_Group3.Models.MedicationDto>
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>Add New Medication</h2>
+
+<form action="/Medication/Create" method="POST">
+    <div>
+        <label>Medication Brand:</label> <input type="text" name="MedicationBrand" />
+    </div>
+    <div>
+        <label>Medication Name:</label> <input type="text" name="MedicationName" />
+    </div>
+    <div>
+        <label>Detail:</label>
+    </div>
+    <div>
+        <textarea name="MedicationDetail" rows="5" cols="30" maxlength="500" placeholder="Type here..."></textarea>
+    </div>
+    <div>
+        <label>Medicaiton Price:</label> <input type="text" name="Price" />
+    </div>
+    <div>
+        <input type="submit" value="Add Medication" />
+
+    </div>
+</form>
+
