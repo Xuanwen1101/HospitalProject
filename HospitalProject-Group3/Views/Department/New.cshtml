@@ -1,0 +1,30 @@
+﻿@*@model IEnumerable<HospitalProject_Group3.Models.DepartmentDto>*@
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>Add New Role</h2>
+
+<form action="/Role/Create" method="POST">
+    <div>
+        <label>Role Type:</label> <input type="text" name="RoleType" />
+    </div>
+    
+    <div>
+        <label>Department:</label>
+
+        @*<select name="DepartmentID">
+            @foreach (var department in Model)
+            {
+                <option value="@department.DepartmentID">@department.DepartmentName</option>
+
+            }
+        </select>*@
+    </div>
+  
+    <div>
+        <input type="submit" value="Add Role" />
+
+    </div>
+</form>
+

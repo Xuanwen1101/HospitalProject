@@ -1,0 +1,19 @@
+﻿@model IEnumerable<HospitalProject_Group3.Models.RoleDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List of Departments</h2>
+
+<div>
+    <a class="navlink" href="/Department/New">Add a New Department</a>
+</div>
+
+
+<div id="containerlist">
+    @foreach (var role in Model)
+    {
+        <h2><a href="/Department/Details/@department.DepartmentID"> @department.DepartmentName</a></h2>
+
+    }
+</div>

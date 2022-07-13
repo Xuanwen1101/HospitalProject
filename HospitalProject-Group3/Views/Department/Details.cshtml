@@ -1,0 +1,34 @@
+﻿@model HospitalProject_Group3.Models.ViewModels.DetailsRole
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Department Details</h2>
+
+<div>
+    <a class="navlink" href="/Department/List">Back To Departments List</a>
+</div>
+<div>
+    <a style="color: #ec3838;" href="/Department/DeleteConfirm/@Model.SelectedDepartment.DepartmentID">Delete This
+        Department</a>
+</div>
+<div>
+    <a style="color: #8338ec;" href="/Department/Edit/@Model.SelectedDepartment.DepartmentID">Update This Department</a>
+</div>
+
+<div id="containershow">
+    <h2 style="color: #0a9396 ">@Model.SelectedDepartment.Roles</h2>
+    <div><label>Department Roles:</label> <a href="/Department/Details/@Model.SelectedDepartment.Roles">
+            @Model.SelectedDepartment.Roles</a></div>
+
+    <div style="margin-top:100px;">
+        <h3>Staff members who worked as <span style="color: #0a9396 ">@Model.SelectedRole.RoleType</span>:</h3>
+        @foreach (var staff in Model.DeptStaff)
+        {
+            <div>
+                <a href="/Staff/Details/@staff.StaffID">@staff.StaffFName @staff.StaffLName</a>
+            </div>
+        }
+    </div>
+
+</div>
