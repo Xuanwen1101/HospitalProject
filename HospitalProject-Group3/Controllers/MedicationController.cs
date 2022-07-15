@@ -68,6 +68,21 @@ namespace HospitalProject_Group3.Controllers
             return View(medications);
         }
 
+        // GET: Medication/Details/5
+        public ActionResult Details(int id)
+        {
+            DetailsMedication ViewModel = new DetailsMedication();
+
+            string url = "MedicationData/FindMedication/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            MedicationDto SelectedMedication = response.Content.ReadAsAsync<MedicationDto>().Result;
+
+            ViewModel.SelectedMedication = SelectedMedication;
+            return View(ViewModel);
+        }
+
+
         // GET: Medication/New
         /*[Authorize]*/
         public ActionResult New()

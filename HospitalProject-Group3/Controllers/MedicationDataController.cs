@@ -52,6 +52,39 @@ namespace HospitalProject_Group3.Controllers
         }
 
         /// <summary>
+        /// Returns the Medication info for the given Role id.
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: An Medication in the system matching up to the Medication ID primary key
+        /// or
+        /// HEADER: 404 (NOT FOUND)
+        /// </returns>
+        /// <param name="id">The primary key of the Medication</param>
+        /// <example>
+        /// GET: api/MedicationData/FindMedication/5
+        /// </example>
+        [ResponseType(typeof(Medication))]
+        [HttpGet]
+        public IHttpActionResult FindMedication(int id)
+        {
+            Medication Medications = db.Medications.Find(id);
+            MedicationDto MedicationDto = new MedicationDto()
+            {
+                MedicationID = Medications.MedicationID,
+                MedicationBrand= Medications.MedicationBrand,
+                MedicationName = Medications.MedicationName,
+                Price = Medications.Price
+            };
+            if (Medications == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(MedicationDto);
+        }
+
+        /// <summary>
         /// Adds a Medication to the system
         /// </summary>
         /// <param name="Medication">JSON FORM DATA of a Medication</param>
@@ -82,9 +115,9 @@ namespace HospitalProject_Group3.Controllers
         }
 
         /// <summary>
-        /// Deletes an Role from the system by it's ID.
+        /// Deletes an Medication from the system by it's ID.
         /// </summary>
-        /// <param name="id">The primary key of the Role</param>
+        /// <param name="id">The primary key of the Medication</param>
         /// <returns>
         /// HEADER: 200 (OK)
         /// or
@@ -97,18 +130,18 @@ namespace HospitalProject_Group3.Controllers
         [ResponseType(typeof(Role))]
         [HttpPost]
         /*[Authorize]*/
-        public IHttpActionResult DeleteRole(int id)
+        public IHttpActionResult DeleteMedication(int id)
         {
-            Role role = db.Roles.Find(id);
-            if (role == null)
+            Medication medication = db.Medications.Find(id);
+            if (medication == null)
             {
                 return NotFound();
             }
 
-            db.Roles.Remove(role);
+            db.Medications.Remove(medication);
             db.SaveChanges();
 
-            return Ok(role);
+            return Ok(medication);
         }
 
 
@@ -121,7 +154,7 @@ namespace HospitalProject_Group3.Controllers
             base.Dispose(disposing);
         }
 
-        private bool RoleExists(int id)
+        private bool MedicationExists(int id)
         {
             return db.Roles.Count(e => e.RoleID == id) > 0;
         }
