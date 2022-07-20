@@ -1,0 +1,26 @@
+﻿@model HospitalProject_Group3.Models.ViewModels.UpdateDepartment
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Update Department</h2>
+<form action="/Department/Update/@Model.SelectedDepartment.DepartmentID" method="POST" enctype="multipart/form-data">
+    <div style="display:none;">
+        @* Pass through the Department ID *@
+        <input type="text" name="DepartmentID" value="@Model.SelectedDepartment.DepartmentID" />
+    </div>
+    <div>
+        <label>Department Name:</label> <input type="text" name="DepartmentName"
+            value="@Model.SelectedDepartment.DepartmentName" />
+    </div>
+
+    <!-- Time allowing, perhaps add option to edit available Roles within the selected department? -->
+
+    <div>
+        <input type="submit" value="Update Department" />
+
+    </div>
+</form>
+<div style="margin-top:50px;">
+    <a class="navlink" href="/Department/Details/@Model.SelectedDepartment.DepartmentID">Back to Department Details</a>
+</div>

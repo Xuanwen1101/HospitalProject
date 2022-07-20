@@ -1,0 +1,20 @@
+﻿@model HospitalProject_Group3.Models.DepartmentDto
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+<h2>Are you sure you want to delete @Model.DepartmentType?</h2>
+
+<p>This action cannot be undone.</p>
+
+<nav>
+    <a class="navlink" href="/Department/Details/@Model.DepartmentID">Cancel</a>
+</nav>
+
+<form method="POST" action="/Department/Delete/@Model.DepartmentID">
+
+    <button class="delbutton">
+        Confirm Delete
+    </button>
+
+</form>
