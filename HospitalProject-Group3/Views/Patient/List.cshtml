@@ -1,0 +1,22 @@
+﻿@model IEnumerable<HospitalProject_Group3.Models.PatientDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List of Patients</h2>
+
+<div>
+    <a class="navlink" href="/Patient/New">Add a New Patient</a>
+</div>
+
+<div id="containerlist">
+    @foreach (var patient in Model)
+    {
+        <h2><a href="/Patient/Details/@patient.PatientID">@patient.PatientFName @patient.PatientLName</a></h2>
+        <div>Blood Type: @patient.BloodType</div>
+        <div>Insurance Details: @patient.InsuranceID</div>
+        <div>Insurance Company: @patient.InsuranceCompany</div>
+
+    }
+</div>
+

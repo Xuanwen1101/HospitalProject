@@ -1,0 +1,35 @@
+﻿@model HospitalProject_Group3.Models.PatientDto
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Update Patient</h2>
+<form action="/Patient/Update/@Model.PatientID" method="POST" enctype="multipart/form-data">
+    <div style="display:none;">
+        @* Pass through the Shift ID *@
+        <input type="text" name="PatientID" value="@Model.PatientID" />
+    </div>
+    <div>
+    <label>First Name:</label> <input type="text" name="PatientFName" value="@Model.PatientFName" />
+    </div>
+    <div>
+        <label>Last Name:</label> <input type="text" name="PatientLName" value="@Model.PatientLName" />
+    </div>
+    <div>
+        <label>Phone number:</label><input type="text" name="PhoneNumber" value="@Model.PhoneNumber" />
+    </div>
+    <div>
+        <label>Email:</label><input type="text" name="Email" value="@Model.Email" />
+    </div>
+
+    <div style="padding-top: 10px; padding-bottom: 20px; ">
+        <input type="file" name="PatientHasPhoto" />
+    </div>
+    <div>
+        <input type="submit" value="Update Patient" />
+    </div>
+</form>
+<div style="margin-top:50px;">
+    <a class="navlink" href="/Patient/Details/@Model.PatientID">Back to The Patient's Detail</a>
+</div>
+
