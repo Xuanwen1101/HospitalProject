@@ -1,0 +1,14 @@
+﻿@model HospitalProject_Group3.Models.AppointmentDto
+
+
+@{
+    ViewBag.Title = "View";
+}
+
+<a href="/Appointment/List">Go back to list</a>
+
+<h2>@Model.AppointmentDateTime</h2>
+<h2>@Model.PatientFName</h2>
+<h2>@Model.PatientLName</h2>
+<div> @Model.StaffFName</div>
+<div> @Model.StaffLName</div>
