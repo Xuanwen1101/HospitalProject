@@ -1,0 +1,20 @@
+﻿@model HospitalProject_Group3.Models.ViewModels.UpdateInsurance
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit Insurance</h2>
+
+<form action="/Insurance/Update/@Model.SelectedInsurance.InsuranceID" method="POST">
+    <div>
+        <label>Company:</label> <input type="text" name="InsuranceCompany" value="@Model.SelectedInsurance.InsuranceCompany"/>
+    </div>
+    <div>
+        <label>Plan:</label> <input type="text" name="InsurancePlan" value="@Model.SelectedInsurance.InsurancePlan"/>
+    </div>
+    <div>
+        <input type="submit" value="Update Insurance" />
+
+    </div>
+</form>
+
