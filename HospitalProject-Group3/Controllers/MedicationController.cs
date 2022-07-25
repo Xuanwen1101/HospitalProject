@@ -87,11 +87,6 @@ namespace HospitalProject_Group3.Controllers
         /*[Authorize]*/
         public ActionResult New()
         {
-            /*
-            string url = "MedicationData/ListMedications";
-            HttpResponseMessage response = client.GetAsync(url).Result;
-            IEnumerable<MedicationDto> Medication = response.Content.ReadAsAsync<IEnumerable<MedicationDto>>().Result;
-            */
             return View();
         }
 
@@ -123,14 +118,57 @@ namespace HospitalProject_Group3.Controllers
             }
         }
 
+        // GET: Medication/Edit/5
+        /*[Authorize]*/
+        public ActionResult Edit(int id)
+        {
+            UpdateMedication ViewModel = new UpdateMedication();
+
+            //get the existing Medication information
+            //curl https://localhost:44342/api/MedicationData/FindMedication/{id}
+            string url = "MedicationData/FindMedication/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            MedicationDto SelectedMedication = response.Content.ReadAsAsync<MedicationDto>().Result;
+            ViewModel.SelectedMedication = SelectedMedication;
+
+            return View(ViewModel);
+        }
+
+        // POST: Medication/Update/5
+        [HttpPost]
+        /*[Authorize]*/
+        public ActionResult Update(int id, Medication medication)
+        {
+            GetApplicationCookie();//get token credentials
+            //objective: update the selected Medication into our system using the API
+            //curl -H "Content-Type:application/json" -d @Medication.json  https://localhost:44342/api/MedicationData/UpdateMedication/{id}
+            string url = "MedicationData/UpdateMedication/" + id;
+            string jsonPayload = jss.Serialize(medication);
+
+            HttpContent content = new StringContent(jsonPayload);
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            Debug.WriteLine(content);
+
+            //update request is successful, and we have image data
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+
+        }
 
         // GET: Medication/DeleteConfirm/5
         /*[Authorize]*/
         public ActionResult DeleteConfirm(int id)
         {
-            // get the existing role information
-            //curl https://localhost:44342/api/MedicationData/FindData/{id}
-            string url = "MedicationData/FindData" + id;
+            // get the existing Medication information
+            //curl https://localhost:44342/api/MedicationData/FindMedication/{id}
+            string url = "MedicationData/FindMedication" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             MedicationDto selectedMedication = response.Content.ReadAsAsync<MedicationDto>().Result;
 
@@ -144,7 +182,7 @@ namespace HospitalProject_Group3.Controllers
         public ActionResult Delete(int id)
         {
             GetApplicationCookie();//get token credentials
-            //objective: delete the selected role from our system using the API
+            //objective: delete the selected Medication from our system using the API
             //curl -d "" https://localhost:44342/api/MedicationData/DeleteMedication/{id}
             string url = "MedicationData/DeleteMedication/" + id;
             HttpContent content = new StringContent("");

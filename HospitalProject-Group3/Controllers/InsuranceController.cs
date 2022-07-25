@@ -69,6 +69,28 @@ namespace HospitalProject_Group3.Controllers
             return View(Insurances);
         }
 
+        // GET: Insurance/Details/5
+        public ActionResult Details(int id)
+        {
+            DetailsInsurance ViewModel = new DetailsInsurance();
+
+            string url = "InsuranceData/FindInsurance/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+
+            InsuranceDto SelectedInsurance = response.Content.ReadAsAsync<InsuranceDto>().Result;
+
+            ViewModel.SelectedInsurance = SelectedInsurance;
+            return View(ViewModel);
+        }
+
+
+        // GET: Insurance/New
+        /*[Authorize]*/
+        public ActionResult New()
+        {
+            return View();
+        }
+
         // POST: Insurance/Create
         [HttpPost]
         /*[Authorize]*/
@@ -87,6 +109,87 @@ namespace HospitalProject_Group3.Controllers
             content.Headers.ContentType.MediaType = "application/json";
 
             HttpResponseMessage response = client.PostAsync(url, content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+        }
+
+        // GET: Insurance/Edit/5
+        /*[Authorize]*/
+        public ActionResult Edit(int id)
+        {
+            UpdateInsurance ViewModel = new UpdateInsurance();
+
+            //get the existing Insurance information
+            //curl https://localhost:44342/api/InsuranceData/FindInsurance/{id}
+            string url = "InsuranceData/FindInsurance/" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            InsuranceDto SelectedInsurance = response.Content.ReadAsAsync<InsuranceDto>().Result;
+            ViewModel.SelectedInsurance = SelectedInsurance;
+
+            return View(ViewModel);
+        }
+
+        // POST: Insurance/Update/5
+        [HttpPost]
+        /*[Authorize]*/
+        public ActionResult Update(int id, Insurance insurance)
+        {
+            GetApplicationCookie();//get token credentials
+            //objective: update the selected Insurance into our system using the API
+            //curl -H "Content-Type:application/json" -d @Insurance.json  https://localhost:44342/api/InsuranceData/UpdateInsurance/{id}
+            string url = "InsuranceData/UpdateInsurance/" + id;
+            string jsonPayload = jss.Serialize(insurance);
+
+            HttpContent content = new StringContent(jsonPayload);
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+            Debug.WriteLine(content);
+
+            //update request is successful, and we have image data
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return RedirectToAction("Error");
+            }
+
+        }
+
+        // GET: Insurance/DeleteConfirm/5
+        /*[Authorize]*/
+        public ActionResult DeleteConfirm(int id)
+        {
+            // get the existing role information
+            //curl https://localhost:44342/api/InsuranceData/FindInsurance/{id}
+            string url = "InsuranceData/FindInsurance" + id;
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            InsuranceDto selectedInsurance = response.Content.ReadAsAsync<InsuranceDto>().Result;
+
+            return View(selectedInsurance);
+
+        }
+
+        // POST: Insurance/Delete/5
+        [HttpPost]
+        /*[Authorize]*/
+        public ActionResult Delete(int id)
+        {
+            GetApplicationCookie();//get token credentials
+            //objective: delete the selected Insurance from our system using the API
+            //curl -d "" https://localhost:44342/api/InsuranceData/DeleteInsurance/{id}
+            string url = "InsuranceData/DeleteInsurance/" + id;
+            HttpContent content = new StringContent("");
+            content.Headers.ContentType.MediaType = "application/json";
+            HttpResponseMessage response = client.PostAsync(url, content).Result;
+
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToAction("List");
