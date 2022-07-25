@@ -14,6 +14,7 @@
     @foreach (var Insurance in Model)
     {
         <h2><a href="/Insurance/Details/@Insurance.InsuranceID"> @Insurance.InsuranceCompany</a></h2>
+        <p>Plan: @Insurance.InsurancePlan</p>
 
     }
 </div>

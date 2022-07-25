@@ -1,17 +1,17 @@
-﻿@model HospitalProject_Group3.Models.StaffDto
+﻿@model HospitalProject_Group3.Models.MedicationDto
 @{
     ViewBag.Title = "DeleteConfirm";
 }
 
-<h2>Are you sure you want to delete @Model.StaffFName @Model.StaffLName?</h2>
+<h2>Are you sure you want to delete @Model.MedicationBrand - @Model.MedicationName?</h2>
 
 <p>This action cannot be undone.</p>
 
 <nav>
-    <a class="navlink" href="/Staff/Details/@Model.StaffID">Cancel</a>
+    <a class="navlink" href="/Medication/Details/@Model.MedicationID">Cancel</a>
 </nav>
 
-<form method="POST" action="/Staff/Delete/@Model.StaffID">
+<form method="POST" action="/Medication/Delete/@Model.MedicationID">
 
     <button class="delbutton">
         Confirm Delete

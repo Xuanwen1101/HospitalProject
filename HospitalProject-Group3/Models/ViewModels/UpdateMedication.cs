@@ -5,8 +5,9 @@ using System.Web;
 
 namespace HospitalProject_Group3.Models.ViewModels
 {
-    public class DetailsMedication
+    public class UpdateMedication
     {
         public MedicationDto SelectedMedication { get; set; }
+
     }
 }

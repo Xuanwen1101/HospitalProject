@@ -37,13 +37,13 @@ namespace HospitalProject_Group3.Controllers
             List<Medication> Medications = db.Medications.ToList();
             List<MedicationDto> MedicationDtos = new List<MedicationDto>();
 
-            Medications.ForEach(s => MedicationDtos.Add(new MedicationDto()
+            Medications.ForEach(m => MedicationDtos.Add(new MedicationDto()
             {
-                MedicationID=s.MedicationID,
-                MedicationName=s.MedicationName,
-                MedicationBrand=s.MedicationBrand,
-                MedicationDetail=s.MedicationDetail,
-                Price=s.Price
+                MedicationID= m.MedicationID,
+                MedicationName= m.MedicationName,
+                MedicationBrand= m.MedicationBrand,
+                MedicationDetail= m.MedicationDetail,
+                Price=m.Price
             }));
 
 
@@ -68,15 +68,16 @@ namespace HospitalProject_Group3.Controllers
         [HttpGet]
         public IHttpActionResult FindMedication(int id)
         {
-            Medication Medications = db.Medications.Find(id);
+            Medication Medication = db.Medications.Find(id);
             MedicationDto MedicationDto = new MedicationDto()
             {
-                MedicationID = Medications.MedicationID,
-                MedicationBrand= Medications.MedicationBrand,
-                MedicationName = Medications.MedicationName,
-                Price = Medications.Price
+                MedicationID = Medication.MedicationID,
+                MedicationBrand= Medication.MedicationBrand,
+                MedicationName = Medication.MedicationName,
+                MedicationDetail = Medication.MedicationDetail,
+                Price = Medication.Price
             };
-            if (Medications == null)
+            if (Medication == null)
             {
                 return NotFound();
             }
@@ -115,6 +116,58 @@ namespace HospitalProject_Group3.Controllers
         }
 
         /// <summary>
+        /// Updates the selected Medication in the system with POST Data input
+        /// </summary>
+        /// <param name="id">Represents the Medication ID primary key</param>
+        /// <param name="Medication">JSON FORM DATA of an Medication</param>
+        /// <returns>
+        /// HEADER: 204 (Success, No Content Response)
+        /// or
+        /// HEADER: 400 (Bad Request)
+        /// or
+        /// HEADER: 404 (Not Found)
+        /// </returns>
+        /// <example>
+        /// PUT: api/MedicationData/UpdateMedication/5
+        /// FORM DATA: Medication JSON Object
+        /// </example>
+        [HttpPost]
+        [ResponseType(typeof(void))]
+        /*[Authorize]*/
+        public IHttpActionResult UpdateMedication(int id, Medication medication)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != medication.MedicationID)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(medication).State = EntityState.Modified;
+            
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!MedicationExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        /// <summary>
         /// Deletes an Medication from the system by it's ID.
         /// </summary>
         /// <param name="id">The primary key of the Medication</param>
@@ -127,7 +180,7 @@ namespace HospitalProject_Group3.Controllers
         /// DELETE: api/MedicationData/DeleteMedication/5
         /// FORM DATA: (empty)
         /// </example>
-        [ResponseType(typeof(Role))]
+        [ResponseType(typeof(Medication))]
         [HttpPost]
         /*[Authorize]*/
         public IHttpActionResult DeleteMedication(int id)
@@ -141,7 +194,7 @@ namespace HospitalProject_Group3.Controllers
             db.Medications.Remove(medication);
             db.SaveChanges();
 
-            return Ok(medication);
+            return Ok();
         }
 
 
@@ -156,7 +209,7 @@ namespace HospitalProject_Group3.Controllers
 
         private bool MedicationExists(int id)
         {
-            return db.Roles.Count(e => e.RoleID == id) > 0;
+            return db.Medications.Count(e => e.MedicationID == id) > 0;
         }
     }
 }

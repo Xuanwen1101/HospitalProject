@@ -1,0 +1,33 @@
+﻿@model HospitalProject_Group3.Models.ViewModels.DetailsInsurance
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Insurance's Details</h2>
+
+<div>
+    <a class="navlink" href="/Insurance/List">Back To Insurances' List</a>
+</div>
+<div>
+    <a style="color: #ec3838;" href="/Insurance/DeleteConfirm/@Model.SelectedInsurance.InsuranceID">Delete This Insurance</a>
+</div>
+<div>
+    <a style="color: #8338ec;" href="/Insurance/Edit/@Model.SelectedInsurance.InsuranceID">Update This Insurance</a>
+</div>
+
+<br/>
+<div id="containershow">
+    <!-- <div><label>Company:</label> @Model.SelectedInsurance.InsuranceCompany</div>
+    <div><label>Plan:</label> @Model.SelectedInsurance.InsurancePlan</div>
+        -->
+
+    <div>
+        <h3>Patient has <span style="color: #0a9396 ">@Model.SelectedInsurance.InsuranceCompany</span> with @Model.SelectedInsurance.InsurancePlan :</h3>
+        @*@foreach (var appointment in Model.HadAppointments)
+            {
+                <div>
+                    <a href="/Staff/Details/@appointment.AppointmentID">@appointment.AppointmentID</a>
+                </div>
+            }*@
+    </div>
+</div>
