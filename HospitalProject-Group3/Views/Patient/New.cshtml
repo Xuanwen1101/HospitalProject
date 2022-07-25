@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>Add New Patient</h2>
+<form action="/Patient/Create" method="POST">
+    <div>
+        <label>First Name:</label> <input type="text" name="PatientFName" />
+    </div>
+    <div>
+        <label>Last Name:</label> <input type="text" name="PatientLName" />
+    </div>
+    <div>
+        <label>Gender:</label> <input type="number" name="Gender" />
+    </div>
+    <div>
+        <label>Phone Number:</label> <input type="text" name="PhoneNumber" />
+    </div>
+    <div>
+        <label>Blood Type:</label> <input type="text" name="BloodType" />
+    </div>
+    <div>
+        <label>Email:</label> <input type="text" name="Email" />
+    </div>
+    <div>
+        <label>Date of Birth:</label> <input type="date" name="BornDate" />
+    </div>
+    <div>
+        <label>Insurance ID:</label> <input type="number" name="InsuranceID" />
+    </div>
+    <div>
+        <label>Medication ID:</label> <input type="number" name="Medication_MedicationID" />
+    </div>
+    <div>
+        <input type="submit" value="Add Patient" />
+
+    </div>
+</form>

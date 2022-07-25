@@ -1,0 +1,12 @@
+﻿@model HospitalProject_Group3.Models.BillDto
+
+
+@{
+    ViewBag.Title = "View";
+}
+
+<a href="/Bill/List">Go back to list</a>
+
+<h2>@Model.PatientID</h2>
+<h2>@Model.BillDetail</h2>
+<div> @Model.TotalCost</div>

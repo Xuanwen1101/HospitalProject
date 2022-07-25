@@ -1,0 +1,14 @@
+﻿@model HospitalProject_Group3.Models.PatientDto
+
+
+@{
+    ViewBag.Title = "View";
+}
+
+<a href="/Patient/List">Go back to list</a>
+
+<h2>@Model.PatientFName</h2>
+<h2>@Model.PatientLName</h2>
+<div> @Model.BloodType</div>
+<div> @Model.InsuranceID</div>
+<div> @Model.InsuranceCompany</div>

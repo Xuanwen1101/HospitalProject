@@ -1,0 +1,22 @@
+﻿@model HospitalProject_Group3.Models.BillDto
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+<h2>Are you sure you want to delete bill with ID @Model.BillID associated to patient @Model.PatientID ?</h2>
+
+<p>This action cannot be undone.</p>
+
+<nav>
+    <a class="navlink" href="/Bill/Details/@Model.BillID">Cancel</a>
+</nav>
+
+<form method="POST" action="/bill/Delete/@Model.BillID">
+
+    <button class="delbutton">
+        Confirm Delete
+    </button>
+
+</form>
+
+
