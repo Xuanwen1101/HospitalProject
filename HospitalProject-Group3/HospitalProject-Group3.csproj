@@ -194,6 +194,7 @@
     <Compile Include="Controllers\MedicationDataController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\PatientDataController.cs" />
+    <Compile Include="Controllers\PrescriptionController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\RoleDataController.cs" />
     <Compile Include="Controllers\ShiftController.cs" />
@@ -365,6 +366,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\Patients\" />
     <Folder Include="Content\Images\Staffs\" />
+    <Folder Include="Views\Prescription\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
