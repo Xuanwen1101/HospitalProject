@@ -106,7 +106,7 @@ Find the selecsted Staff
 curl https://localhost:44342/api/StaffData/FindStaff/{id}
 ```
 
-Add a new Staff (new movie info is in staff.json)
+Add a new Staff (new staff info is in staff.json)
 ```
 curl -H "Content-Type:application/json" -d @staff.json https://localhost:44342/api/StaffData/AddStaff
 ```
@@ -165,7 +165,10 @@ curl -F StaffPicture=@file.jpg https://localhost:44342/api/StaffData/UploadStaff
 
 <!-- Future Features & Improvements -->
 ## Future Features
-
+- Search Functionality
+- Payment Functionality
+- Show Hospital Location in Map
+- UX/UI Design
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
