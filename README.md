@@ -5,7 +5,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Xuanwen1101/HospitalProject-Group3">
-    <img src="images/logo.png" alt="Logo" width="120" height="80">
+    <img src="images/logo.jpeg" alt="Logo" width="120" height="120">
   </a>
 
   <h3 align="center">Hospital Project</h3>
@@ -92,7 +92,39 @@ update-database
 <!-- API EXAMPLES -->
 ## Example API Commands
 
+Update 44342 to match the current port number.
+Make sure to utilize Jsondata/staff.json to formulate data you wish to send as part of the POST requests. 
+{id} should be replaced with the staff's primary key ID. 
 
+Get a List of Staffs
+```
+curl https://localhost:44342/api/StaffData/ListStaffs
+```
+
+Find the selecsted Staff
+```
+curl https://localhost:44342/api/StaffData/FindStaff/{id}
+```
+
+Add a new Staff (new movie info is in staff.json)
+```
+curl -H "Content-Type:application/json" -d @staff.json https://localhost:44342/api/StaffData/AddStaff
+```
+
+Delete the selecsted Staff
+```
+curl -d "" https://localhost:44342/api/StaffData/DeleteStaff/{id}
+```
+
+Update a Staff (add the selected staff id into staff.json)
+```
+curl -H "Content-Type:application/json" -d @staff.json  https://localhost:44342/api/StaffData/UpdateStaff/{id}
+```
+
+Update an Staff's Picture (the staff picture is in file.jpg) 
+```
+curl -F StaffPicture=@file.jpg https://localhost:44342/api/StaffData/UploadStaffPicture/{id}
+```
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -111,7 +143,20 @@ update-database
 
 <!-- Project Scope -->
 ## Project Scope
-
+- Manage Appointment (CRUD) - Hilda
+- Manage Bill (CRUD) - Hilda
+- Manage Department (CRUD) - Sean
+- Manage Donor Transplant (CRUD) - Rohit
+- Manage Insurance (CRUD) - Deisy
+- Manage Medical Record (CRUD) - Rohit
+- Manage Medication (CRUD) - Deisy
+- Manage Patient (CRUD) - Hilda
+- Manage Prescription (CRUD) - Sean
+- Manage Role (CRUD) - Xuanwen
+- Manage Shift (CRUD) - Xuanwen
+- Manage Staff (CRUD) - Xuanwen
+- Manage Relationship between Shift and Staff - Xuanwen
+- User Authentication - Deisy
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
