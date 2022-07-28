@@ -6,11 +6,15 @@
 <h2>Edit Insurance</h2>
 
 <form action="/Insurance/Update/@Model.SelectedInsurance.InsuranceID" method="POST">
-    <div>
-        <label>Company:</label> <input type="text" name="InsuranceCompany" value="@Model.SelectedInsurance.InsuranceCompany"/>
+    <div style="display:none;">
+        @* Pass through the Shift ID *@
+        <input type="text" name="InsuranceID" value="@Model.SelectedInsurance.InsuranceID" />
     </div>
     <div>
-        <label>Plan:</label> <input type="text" name="InsurancePlan" value="@Model.SelectedInsurance.InsurancePlan"/>
+        <label>Company:</label> <input type="text" name="InsuranceCompany" value="@Model.SelectedInsurance.InsuranceCompany" />
+    </div>
+    <div>
+        <label>Plan:</label> <input type="text" name="InsurancePlan" value="@Model.SelectedInsurance.InsurancePlan" />
     </div>
     <div>
         <input type="submit" value="Update Insurance" />

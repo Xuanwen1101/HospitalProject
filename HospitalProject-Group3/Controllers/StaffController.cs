@@ -100,14 +100,15 @@ namespace HospitalProject_Group3.Controllers
 
             ViewModel.AvailableShifts = availableShifts;
 
-
-            /*
+            
             url = "AppointmentData/ListAppointmentsForStaff/" + id;
             response = client.GetAsync(url).Result;
             IEnumerable<AppointmentDto> hadAppointments = response.Content.ReadAsAsync<IEnumerable<AppointmentDto>>().Result;
 
             ViewModel.HadAppointments = hadAppointments;
+            
 
+            /*
             url = "PrescriptionData/ListPrescriptionsForStaff/" + id;
             response = client.GetAsync(url).Result;
             IEnumerable<PrescriptionDto> createdPrescriptions = response.Content.ReadAsAsync<IEnumerable<PrescriptionDto>>().Result;

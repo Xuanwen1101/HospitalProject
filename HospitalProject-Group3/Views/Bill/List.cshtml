@@ -13,10 +13,11 @@
 <div id="containerlist">
     @foreach (var bill in Model)
     {
-        <h2><a href="/Bill/Details/@bill.BillID">@bill.PatientLName @bill.PatientFName</a></h2>
-        <div>Bill:@bill.BillDetail</div>
-        <div>Total Cost:@bill.TotalCost</div>
-       
+        <h2><a href="/Bill/Details/@bill.BillID">@bill.BillID</a></h2>
+        <div>Patient: @bill.PatientLName @bill.PatientFName</div>
+        <div>Bill: @bill.BillDetail</div>
+        <div>Total Cost: @bill.TotalCost</div>
+
     }
 </div>
 
