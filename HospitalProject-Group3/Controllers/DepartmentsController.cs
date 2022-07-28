@@ -185,6 +185,7 @@ namespace HospitalProject_Group3.Controllers
             }
         }
 
+
         // GET: Departments/DeleteConfirm/5
         /*[Authorize]*/
         public ActionResult DeleteConfirm(int id)

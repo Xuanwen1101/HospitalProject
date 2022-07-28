@@ -46,6 +46,7 @@ namespace HospitalProject_Group3.Controllers
 
         }
 
+
         /// <summary>
         /// Gathers information about all Departments related to the selected Department ID
         /// </summary>

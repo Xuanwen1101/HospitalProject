@@ -118,6 +118,7 @@ namespace HospitalProject_Group3.Controllers
             return View();
         }
 
+
         // POST: Prescription/Create
         [HttpPost]
         /*[Authorize]*/

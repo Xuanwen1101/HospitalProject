@@ -10,5 +10,6 @@ namespace HospitalProject_Group3.Models.ViewModels
         public DepartmentDto SelectedDepartment { get; set; }
 
         public IEnumerable<DepartmentDto> DepartmentOptions { get; set; }
+
     }
 }

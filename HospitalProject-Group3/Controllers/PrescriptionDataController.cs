@@ -53,6 +53,7 @@ namespace HospitalProject_Group3.Controllers
 
         }
 
+
         /// <summary>
         /// Gathers information about all Prescriptions related to the selected Patient ID
         /// </summary>

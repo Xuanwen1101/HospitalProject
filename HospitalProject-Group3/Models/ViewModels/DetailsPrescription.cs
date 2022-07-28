@@ -10,5 +10,6 @@ namespace HospitalProject_Group3.Models.ViewModels
         public PrescriptionDto SelectedPrescription { get; set; }
         //all patients that have been presribed medication
         public IEnumerable<PatientsDto> PrescribedPatients { get; set; }
+
     }
 }

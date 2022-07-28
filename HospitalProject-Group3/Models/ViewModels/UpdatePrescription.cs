@@ -10,5 +10,6 @@ namespace HospitalProject_Group3.Models.ViewModels
         public PrescriptionDto SelectedPrescription { get; set; }
         //Ability to change/update the prescribed medication for the selected prescription
         public IEnumerable<MedicationDto> MedicationOptions { get; set; }
+
     }
 }
