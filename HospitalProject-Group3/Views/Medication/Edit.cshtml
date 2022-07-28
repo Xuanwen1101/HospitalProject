@@ -8,7 +8,7 @@
 <form action="/Medication/Update/@Model.SelectedMedication.MedicationID" method="POST">
     <div style="display:none;">
         @* Pass through the Shift ID *@
-        <input type="text" name="ShiftID" value="@Model.SelectedMedication.MedicationID" />
+        <input type="text" name="MedicationID" value="@Model.SelectedMedication.MedicationID" />
     </div>
     <div>
         <label>Medication Brand:</label> <input type="text" name="MedicationBrand" value="@Model.SelectedMedication.MedicationBrand" />
@@ -20,7 +20,7 @@
         <label>Detail:</label>
     </div>
     <div>
-        <textarea name="MedicationDetail" rows="5" cols="30" maxlength="500" value="@Model.SelectedMedication.MedicationDetail"></textarea>
+        <textarea name="MedicationDetail" rows="5" cols="30" maxlength="500">@Model.SelectedMedication.MedicationDetail</textarea>
     </div>
     <div>
         <label>Medicaiton Price:</label> <input type="text" name="Price" value="@Model.SelectedMedication.Price" />
