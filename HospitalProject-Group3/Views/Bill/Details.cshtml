@@ -5,8 +5,16 @@
     ViewBag.Title = "View";
 }
 
-<a href="/Bill/List">Go back to list</a>
+<div>
+    <a href="/Bill/List">Go back to list</a>
+</div>
+<div>
+    <a href="/Bill/DeleteConfirm/@Model.BillID">Delete This Bill</a>
+</div>
+<div>
+    <a href="/Bill/Edit/@Model.BillID">Update This Bill</a>
+</div>
 
-<h2>@Model.PatientID</h2>
-<h2>@Model.BillDetail</h2>
-<div> @Model.TotalCost</div>
+<h2>@Model.PatientFName @Model.PatientLName</h2>
+<div>Bill Detail: @Model.BillDetail</div>
+<div>Total Cost: @Model.TotalCost</div>

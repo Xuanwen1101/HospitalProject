@@ -1,14 +1,24 @@
-﻿@model HospitalProject_Group3.Models.PatientDto
+﻿@model HospitalProject_Group3.Models.ViewModels.DetailsPatient
 
 
 @{
     ViewBag.Title = "View";
 }
 
-<a href="/Patient/List">Go back to list</a>
+<div>
+    <a href="/Patient/List">Go back to list</a>
+</div>
 
-<h2>@Model.PatientFName</h2>
-<h2>@Model.PatientLName</h2>
-<div> @Model.BloodType</div>
-<div> @Model.InsuranceID</div>
-<div> @Model.InsuranceCompany</div>
+<div>
+    <a href="/Patient/DeleteConfirm/@Model.SelectedPatient.PatientID">Delete This Patient</a>
+</div>
+
+<div>
+    <a href="/Patient/Edit/@Model.SelectedPatient.PatientID">Update This Patient</a>
+</div>
+
+
+<h2>@Model.SelectedPatient.PatientFName @Model.SelectedPatient.PatientLName</h2>
+<div> <label>BloodType: </label> @Model.SelectedPatient.BloodType</div>
+<div> <label>Born Date: </label> @Model.SelectedPatient.BornDate.ToString("yyyy-MM-dd")</div>
+<div> <label>Insurance Company: </label> @Model.SelectedPatient.InsuranceCompany</div>

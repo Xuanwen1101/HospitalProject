@@ -12,8 +12,8 @@
 <div id="containerlist">
     @foreach (var appointment in Model)
     {
-        <h2><a href="/Patient/Details/@appointment.AppointmentID"></a></h2>
-        <div>Appointment Date: @appointment.AppointmentDateTime</div>
+        <h2><a href="/Appointment/Details/@appointment.AppointmentID">@appointment.AppointmentID</a></h2>
+        <div>Appointment Date: @appointment.AppointmentDateTime.ToString("yyyy-MM-dd")</div>
         <div>Patient Details: @appointment.PatientFName @appointment.PatientLName</div>
         <div>Staff Details: @appointment.StaffFName @appointment.StaffLName</div>
 
