@@ -186,6 +186,7 @@ namespace HospitalProject_Group3.Controllers
             //objective: delete the selected Insurance from our system using the API
             //curl -d "" https://localhost:44342/api/InsuranceData/DeleteInsurance/{id}
             string url = "InsuranceData/DeleteInsurance/" + id;
+
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
             HttpResponseMessage response = client.PostAsync(url, content).Result;

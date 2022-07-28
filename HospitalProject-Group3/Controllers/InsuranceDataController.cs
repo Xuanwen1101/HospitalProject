@@ -140,6 +140,7 @@ namespace HospitalProject_Group3.Controllers
                 return BadRequest();
             }
 
+
             db.Entry(insurance).State = EntityState.Modified;
 
             try
@@ -180,6 +181,7 @@ namespace HospitalProject_Group3.Controllers
         public IHttpActionResult DeleteInsurance(int id)
         {
             Insurance Insurance = db.Insurances.Find(id);
+
             if (Insurance == null)
             {
                 return NotFound();
@@ -188,7 +190,7 @@ namespace HospitalProject_Group3.Controllers
             db.Insurances.Remove(Insurance);
             db.SaveChanges();
 
-            return Ok(Insurance);
+            return Ok();
         }
 
 
