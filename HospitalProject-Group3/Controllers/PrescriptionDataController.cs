@@ -111,17 +111,17 @@ namespace HospitalProject_Group3.Controllers
             Prescription Prescription = db.Prescriptions.Find(id);
             PrescriptionDto PrescriptionDto = new PrescriptionDto()
             {
-                PrescriptionID = r.PrescriptionID,
-                PrescriptionDate = r.PrescriptionDate,
-                DoctorNote = r.DoctorNote,
-                StaffID = r.Staff.StaffID,
-                StaffFName = r.Staff.StaffFName,
-                StaffLName = r.Staff.StaffLName,
-                PatientID = r.Patient.PatientID,
-                PatientFName = r.Patient.PatientFName,
-                PatientLName = r.Patient.PatientLName,
-                MedicationID = r.Medication.MedicationID,
-                MedicationName = r.Medication.MedicationName
+                PrescriptionID = Prescription.PrescriptionID,
+                PrescriptionDate = Prescription.PrescriptionDate,
+                DoctorNote = Prescription.DoctorNote,
+                StaffID = Prescription.Staff.StaffID,
+                StaffFName = Prescription.Staff.StaffFName,
+                StaffLName = Prescription.Staff.StaffLName,
+                PatientID = Prescription.Patient.PatientID,
+                PatientFName = Prescription.Patient.PatientFName,
+                PatientLName = Prescription.Patient.PatientLName,
+                MedicationID = Prescription.Medication.MedicationID,
+                MedicationName = Prescription.Medication.MedicationName
             };
             if (Prescription == null)
             {

@@ -97,10 +97,10 @@ namespace HospitalProject_Group3.Controllers
             Department Department = db.Departments.Find(id);
             DepartmentDto DepartmentDto = new DepartmentDto()
             {
-                DepartmentID = r.DepartmentID,
-                DepartmentName = r.DepartmentName,
-                RoomNumber = r.RoomNumber,
-                RoleType = r.Role.RoleType
+                DepartmentID = Department.DepartmentID,
+                DepartmentName = Department.DepartmentName,
+                RoomNumber = Department.RoomNumber,
+                RoleType = Department.Role.RoleType
             };
             if (Department == null)
             {
