@@ -1,0 +1,44 @@
+﻿@model HospitalProject_Group3.Models.ViewModels.UpdatePrescription
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Update Prescription</h2>
+<form action="/Prescription/Update/@Model.SelectedPrescription.PrescriptionID" method="POST"
+      enctype="multipart/form-data">
+    <div style="display:none;">
+        @* Pass through the Prescription ID *@
+        <input type="text" name="PrescriptionID" value="@Model.SelectedPrescription.PrescriptionID" />
+    </div>
+    <div>
+        <label>Patient's First Name:</label> <input type="text" name="PatientFName"
+                                                    value="@Model.SelectedPrescription.PatientFName" />
+    </div>
+    <div>
+        <label>Patient's Last Name:</label> <input type="text" name="PatientLName"
+                                                   value="@Model.SelectedPrescription.PatientLName" />
+    </div>
+    <div>
+        <label>Medication:</label> <input type="text" name="MedicationName"
+                                          value="@Model.SelectedPrescription.MedicationName" />
+    </div>
+    <div>
+        <label>Prescription Date:</label> <input type="text" name="PrescriptionDate"
+                                                 value="@Model.SelectedPrescription.PrescriptionDate" />
+    </div>
+    <div>
+        <label>Doctor's Note:</label> <input type="text" name="DoctorNote"
+                                             value="@Model.SelectedPrescription.DoctorNote" />
+    </div>
+
+    <div>
+        <input type="submit" value="Update Prescription" />
+
+    </div>
+</form>
+<div style="margin-top:50px;">
+    <a class="navlink" href="/Prescription/Details/@Model.SelectedPrescription.PrescriptionID">
+        Back to Prescription
+        Details
+    </a>
+</div>

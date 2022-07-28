@@ -1,0 +1,28 @@
+﻿@*@model IEnumerable<HospitalProject_Group3.Models.PrescriptionDto>*@
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>Add a New Prescription</h2>
+
+<form action="/Prescription/Create" method="POST">
+    <div>
+        <label>Prescription Name:</label> <input type="text" name="PrescriptionName" />
+    </div>
+
+    <div>
+        <label>Prescription:</label>
+
+        @*<select name="PrescriptionID">
+            @foreach (var prescription in Model)
+            {
+            <option value="@prescription.PrescriptionID">@prescription.PrescriptionName</option>
+            }
+            </select>*@
+    </div>
+
+    <div>
+        <input type="submit" value="Add Prescription" />
+
+    </div>
+</form>
