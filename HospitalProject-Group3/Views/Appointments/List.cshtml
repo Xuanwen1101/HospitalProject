@@ -1,0 +1,22 @@
+﻿@model IEnumerable<HospitalProject_Group3.Models.AppointmentDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List of Appointments</h2>
+
+<div>
+    <a class="navlink" href="/Appointment/New">Add a New Appointment</a>
+</div>
+
+<div id="containerlist">
+    @foreach (var appointment in Model)
+    {
+        <h2><a href="/Patient/Details/@appointment.AppointmentID"></a></h2>
+        <div>Appointment Date: @appointment.AppointmentDateTime</div>
+        <div>Patient Details: @appointment.PatientFName @appointment.PatientLName</div>
+        <div>Staff Details: @appointment.StaffFName @appointment.StaffLName</div>
+
+    }
+</div>
+
