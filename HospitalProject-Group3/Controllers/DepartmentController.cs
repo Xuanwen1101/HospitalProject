@@ -69,9 +69,10 @@ namespace HospitalProject_Group3.Controllers
 
             IEnumerable<DepartmentDto> departmentOptions = response.Content.ReadAsAsync<IEnumerable<DepartmentDto>>().Result;
 
-            ViewModel.DepartmentOptions = departmentOptions;
+            /*ViewModel.DepartmentOptions = departmentOptions;
 
-            return View(ViewModel);
+            return View(ViewModel);*/
+            return View(departmentOptions);
         }
 
 
@@ -125,7 +126,7 @@ namespace HospitalProject_Group3.Controllers
             string url = "DepartmentData/AddDepartment";
 
 
-            string jsonPayload = jss.Serialize(role);
+            string jsonPayload = jss.Serialize(department);
 
             Debug.WriteLine("the json payload is :", jsonPayload);
 

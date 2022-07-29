@@ -36,9 +36,8 @@ namespace HospitalProject_Group3.Controllers
             Departments.ForEach(r => DepartmentDtos.Add(new DepartmentDto()
             {
                 DepartmentID = r.DepartmentID,
-                DepartmentType = r.DepartmentType,
-                DepartmentID = r.Department.DepartmentID,
-                DepartmentName = r.Department.DepartmentName
+                DepartmentName = r.DepartmentName,
+                RoomNumber = r.RoomNumber
             }));
 
 
@@ -69,8 +68,7 @@ namespace HospitalProject_Group3.Controllers
             {
                 DepartmentID = r.DepartmentID,
                 DepartmentName = r.DepartmentName,
-                RoomNumber = r.RoomNumber,
-                RoleType = r.Role.RoleType
+                RoomNumber = r.RoomNumber
             }));
 
             return Ok(DepartmentDtos);
@@ -99,8 +97,7 @@ namespace HospitalProject_Group3.Controllers
             {
                 DepartmentID = Department.DepartmentID,
                 DepartmentName = Department.DepartmentName,
-                RoomNumber = Department.RoomNumber,
-                RoleType = Department.Role.RoleType
+                RoomNumber = Department.RoomNumber
             };
             if (Department == null)
             {

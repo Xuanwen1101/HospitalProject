@@ -362,16 +362,6 @@
     <Content Include="Views\Insurance\Details.cshtml" />
     <Content Include="Views\Insurance\DeleteConfirm.cshtml" />
     <Content Include="Views\Insurance\Edit.cshtml" />
-    <Content Include="Views\Bills\DeleteConfirm.cshtml" />
-    <Content Include="Views\Bills\Details.cshtml" />
-    <Content Include="Views\Bills\Error.cshtml" />
-    <Content Include="Views\Bills\List.cshtml" />
-    <Content Include="Views\Bills\New.cshtml" />
-    <Content Include="Views\Appointments\DeleteConfirm.cshtml" />
-    <Content Include="Views\Appointments\Details.cshtml" />
-    <Content Include="Views\Appointments\Error.cshtml" />
-    <Content Include="Views\Appointments\List.cshtml" />
-    <Content Include="Views\Appointments\New.cshtml" />
     <Content Include="Views\Department\DeleteConfirm.cshtml" />
     <Content Include="Views\Department\Details.cshtml" />
     <Content Include="Views\Department\Edit.cshtml" />
@@ -389,8 +379,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\Patients\" />
     <Folder Include="Content\Images\Staffs\" />
-    <Folder Include="Views\DepartmentData\" />
-    <Folder Include="Views\PrescriptionData\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
