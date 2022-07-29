@@ -17,7 +17,12 @@
 
 <div id="containershow">
     <h2 style="color: #0a9396 ">@Model.SelectedRole.RoleType</h2>
-    <div><label>Role Department:</label> <a href="/Role/Details/@Model.SelectedRole.DepartmentID"> @Model.SelectedRole.DepartmentName</a></div>
+    <div>
+        <label>Role Department:</label>
+        @Model.SelectedRole.DepartmentName
+        @*Waiting for Details function in DepartmentController*@
+        @*<a href="/Department/Details/@Model.SelectedRole.DepartmentID"> @Model.SelectedRole.DepartmentName</a>*@
+    </div>
 
     <div style="margin-top:100px;">
         <h3>Staffs worked as <span style="color: #0a9396 ">@Model.SelectedRole.RoleType</span>:</h3>
