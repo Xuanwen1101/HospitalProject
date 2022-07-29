@@ -11,12 +11,12 @@ using System.Web.Script.Serialization;
 
 namespace HospitalProject_Group3.Controllers
 {
-    public class RoleController : Controller
+    public class DepartmentsController : Controller
     {
         private static readonly HttpClient client;
         private JavaScriptSerializer jss = new JavaScriptSerializer();
 
-        static RoleController()
+        static DepartmentsController()
         {
             //client = new HttpClient();
             HttpClientHandler handler = new HttpClientHandler()
@@ -58,39 +58,42 @@ namespace HospitalProject_Group3.Controllers
         }
 
 
-        /// GET: Role/List
+        /// GET: Departments/List
         public ActionResult List()
         {
-            //objective: communicate with the data api to retrieve a list of Roles
-            //curl https://localhost:44342/api/RoleData/ListRoles
+            //objective: communicate with the data api to retrieve a list of Departments
+            //curl https://localhost:44342/api/DepartmentData/ListDepartments
 
-            string url = "RoleData/ListRoles";
+            string url = "DepartmentData/ListDepartments";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            IEnumerable<RoleDto> staffs = response.Content.ReadAsAsync<IEnumerable<RoleDto>>().Result;
+            IEnumerable<DepartmentDto> departmentOptions = response.Content.ReadAsAsync<IEnumerable<DepartmentDto>>().Result;
 
-            return View(staffs);
+            /*ViewModel.DepartmentOptions = departmentOptions;
+
+            return View(ViewModel);*/
+            return View(departmentOptions);
         }
 
 
-        // GET: Role/Details/5
+        // GET: Departments/Details/5
         public ActionResult Details(int id)
         {
-            DetailsRole ViewModel = new DetailsRole();
+            DetailsDepartment ViewModel = new DetailsDepartment();
 
-            string url = "RoleData/FindRole/" + id;
+            string url = "DepartmentData/FindDepartment/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            RoleDto SelectedRole = response.Content.ReadAsAsync<RoleDto>().Result;
+            DepartmentDto SelectedDepartment = response.Content.ReadAsAsync<DepartmentDto>().Result;
 
-            ViewModel.SelectedRole = SelectedRole;
+            ViewModel.SelectedDepartment = SelectedDepartment;
 
 
-            url = "StaffData/ListStaffsForRole/" + id;
+            url = "StaffData/ListStaffsForDepartment/" + id;
             response = client.GetAsync(url).Result;
-            IEnumerable<StaffDto> workedStaffs = response.Content.ReadAsAsync<IEnumerable<StaffDto>>().Result;
+            IEnumerable<StaffDto> deptStaff = response.Content.ReadAsAsync<IEnumerable<StaffDto>>().Result;
 
-            ViewModel.WorkedStaffs = workedStaffs;
+            ViewModel.DeptStaff = deptStaff;
 
 
             return View(ViewModel);
@@ -104,33 +107,26 @@ namespace HospitalProject_Group3.Controllers
         }
 
 
-        // GET: Role/New
+        // GET: Departments/New
         /*[Authorize]*/
         public ActionResult New()
         {
-            
-            string url = "DepartmentData/ListDepartments";
-            HttpResponseMessage response = client.GetAsync(url).Result;
-            IEnumerable<DepartmentDto> DepartmentOptions = response.Content.ReadAsAsync<IEnumerable<DepartmentDto>>().Result;
 
-            return View(DepartmentOptions);
-            
-
-            /*return View();*/
+            return View();
         }
 
-        // POST: Role/Create
+        // POST: Departments/Create
         [HttpPost]
         /*[Authorize]*/
-        public ActionResult Create(Role role)
+        public ActionResult Create(Department department)
         {
             GetApplicationCookie();//get token credentials
-            //objective: add a new role into our system using the API
-            //curl -H "Content-Type:application/json" -d @role.json https://localhost:44342/api/RoleData/AddRole 
-            string url = "RoleData/AddRole";
+            //objective: add a new Department into our system using the API
+            //curl -H "Content-Type:application/json" -d @department.json https://localhost:44342/api/DepartmentData/AddDepartment 
+            string url = "DepartmentData/AddDepartment";
 
 
-            string jsonPayload = jss.Serialize(role);
+            string jsonPayload = jss.Serialize(department);
 
             Debug.WriteLine("the json payload is :", jsonPayload);
 
@@ -149,40 +145,32 @@ namespace HospitalProject_Group3.Controllers
         }
 
 
-        // GET: Role/Edit/5
+        // GET: Departments/Edit/5
         /*[Authorize]*/
         public ActionResult Edit(int id)
         {
-            UpdateRole ViewModel = new UpdateRole();
+            UpdateDepartment ViewModel = new UpdateDepartment();
 
-            //get the existing role information
-            //curl https://localhost:44349/api/RoleData/FindRole/{id}
-            string url = "RoleData/FindRole/" + id;
+            //get the existing department information
+            //curl https://localhost:44349/api/DepartmentData/FindDepartment/{id}
+            string url = "DepartmentData/FindDepartment/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-            RoleDto SelectedRole = response.Content.ReadAsAsync<RoleDto>().Result;
-            ViewModel.SelectedRole = SelectedRole;
-
-            
-            url = "DepartmentData/ListDepartments/";
-            response = client.GetAsync(url).Result;
-            IEnumerable<DepartmentDto> departmentOptions = response.Content.ReadAsAsync<IEnumerable<DepartmentDto>>().Result;
-
-            ViewModel.DepartmentOptions = departmentOptions;
-            
+            DepartmentDto SelectedDepartment = response.Content.ReadAsAsync<DepartmentDto>().Result;
+            ViewModel.SelectedDepartment = SelectedDepartment;
 
             return View(ViewModel);
         }
 
 
-        // POST: Role/Update/5
+        // POST: Departments/Update/5
         [HttpPost]
         /*[Authorize]*/
-        public ActionResult Update(int id, Role role)
+        public ActionResult Update(int id, Department department)
         {
             GetApplicationCookie();//get token credentials
 
-            string url = "RoleData/UpdateRole/" + id;
-            string jsonPayload = jss.Serialize(role);
+            string url = "DepartmentData/UpdateDepartment/" + id;
+            string jsonPayload = jss.Serialize(department);
 
             HttpContent content = new StringContent(jsonPayload);
             content.Headers.ContentType.MediaType = "application/json";
@@ -198,29 +186,30 @@ namespace HospitalProject_Group3.Controllers
             }
         }
 
-        // GET: Role/DeleteConfirm/5
+
+        // GET: Departments/DeleteConfirm/5
         /*[Authorize]*/
         public ActionResult DeleteConfirm(int id)
         {
-            // get the existing role information
-            //curl https://localhost:44342/api/RoleData/FindRole/{id}
-            string url = "RoleData/FindRole/" + id;
+            // get the existing department information
+            //curl https://localhost:44342/api/DepartmentData/FindDepartment/{id}
+            string url = "DepartmentData/FindDepartment/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-            RoleDto selectedRole = response.Content.ReadAsAsync<RoleDto>().Result;
+            DepartmentDto selectedDepartment = response.Content.ReadAsAsync<DepartmentDto>().Result;
 
-            return View(selectedRole);
+            return View(selectedDepartment);
 
         }
 
-        // POST: Role/Delete/5
+        // POST: Departments/Delete/5
         [HttpPost]
         /*[Authorize]*/
         public ActionResult Delete(int id)
         {
             GetApplicationCookie();//get token credentials
-            //objective: delete the selected role from our system using the API
-            //curl -d "" https://localhost:44342/api/RoleData/DeleteRole/{id}
-            string url = "RoleData/DeleteRole/" + id;
+            //objective: delete the selected department from our system using the API
+            //curl -d "" https://localhost:44342/api/DepartmentData/DeleteDepartment/{id}
+            string url = "DepartmentData/DeleteDepartment/" + id;
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
             HttpResponseMessage response = client.PostAsync(url, content).Result;

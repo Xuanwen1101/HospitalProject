@@ -15,8 +15,8 @@
     
     <div>
         <label>Department Name:</label>
-        <input type="text" name="DepartmentID" value="@Model.SelectedRole.DepartmentID" />
-        @*<select name="DepartmentID">
+        @*<input type="text" name="DepartmentID" value="@Model.SelectedRole.DepartmentID" />*@
+        <select name="DepartmentID">
             @foreach (var department in Model.DepartmentOptions)
             {
                 string selected = "";
@@ -27,7 +27,7 @@
                 <option value="@department.DepartmentID" @selected>@department.DepartmentName</option>
 
             }
-        </select>*@
+        </select>
     </div>
     
     <div>

@@ -194,7 +194,7 @@ namespace HospitalProject_Group3.Controllers
             db.Medications.Remove(medication);
             db.SaveChanges();
 
-            return Ok();
+            return Ok(medication);
         }
 
 
