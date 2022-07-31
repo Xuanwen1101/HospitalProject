@@ -168,7 +168,7 @@ namespace HospitalProject_Group3.Controllers
         {
             // get the existing Medication information
             //curl https://localhost:44342/api/MedicationData/FindMedication/{id}
-            string url = "MedicationData/FindMedication" + id;
+            string url = "MedicationData/FindMedication/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             MedicationDto selectedMedication = response.Content.ReadAsAsync<MedicationDto>().Result;
             return View(selectedMedication);

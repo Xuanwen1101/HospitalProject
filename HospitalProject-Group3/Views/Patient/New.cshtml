@@ -12,7 +12,11 @@
         <label>Last Name:</label> <input type="text" name="PatientLName" />
     </div>
     <div>
-        <label>Gender:</label> <input type="number" name="Gender" />
+        <label>Gender:</label>
+        <select name="Gender">
+            <option value=1>Female</option>
+            <option value=0>Male</option>
+        </select>
     </div>
     <div>
         <label>Phone Number:</label> <input type="text" name="PhoneNumber" />
@@ -28,9 +32,6 @@
     </div>
     <div>
         <label>Insurance ID:</label> <input type="number" name="InsuranceID" />
-    </div>
-    <div>
-        <label>Medication ID:</label> <input type="number" name="Medication_MedicationID" />
     </div>
     <div>
         <input type="submit" value="Add Patient" />

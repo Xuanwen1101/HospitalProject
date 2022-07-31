@@ -1,0 +1,21 @@
+﻿@model HospitalProject_Group3.Models.AppointmentDto
+
+
+@{
+    ViewBag.Title = "View";
+}
+
+<div>
+    <a href="/Appointment/List">Go back to list</a>
+</div>
+<div>
+    <a style="color: #ec3838;" href="/Appointment/DeleteConfirm/@Model.AppointmentID">Delete This Appointment</a>
+</div>
+<div>
+    <a style="color: #8338ec;" href="/Appointment/Edit/@Model.AppointmentID">Update This Appointment</a>
+</div>
+
+
+<h2>Appointment Schedule: @Model.AppointmentDateTime</h2>
+<div>Patient Name: @Model.PatientFName  @Model.PatientLName</div>
+<div> Staff To See:  @Model.StaffFName  @Model.StaffLName</div>
