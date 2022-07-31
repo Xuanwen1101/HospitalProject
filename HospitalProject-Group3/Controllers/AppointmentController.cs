@@ -42,7 +42,7 @@ namespace HospitalProject_Group3.Controllers
             // to communicate with AppointmentData api controller to access list of Appointment
             //curl https://localhost:44342/api/Appointmentdata/findappointment/{id}
 
-            string url = "appointmentdata/findappointments/" + id;
+            string url = "appointmentdata/findappointment/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
             AppointmentDto selectedappointment = response.Content.ReadAsAsync<AppointmentDto>().Result;

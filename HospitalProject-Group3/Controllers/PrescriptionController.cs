@@ -11,12 +11,12 @@ using System.Web.Script.Serialization;
 
 namespace HospitalProject_Group3.Controllers
 {
-    public class RoleController : Controller
+    public class PrescriptionController : Controller
     {
         private static readonly HttpClient client;
         private JavaScriptSerializer jss = new JavaScriptSerializer();
 
-        static RoleController()
+        static PrescriptionController()
         {
             //client = new HttpClient();
             HttpClientHandler handler = new HttpClientHandler()
@@ -58,35 +58,35 @@ namespace HospitalProject_Group3.Controllers
         }
 
 
-        /// GET: Role/List
+        /// GET: Prescription/List
         public ActionResult List()
         {
-            //objective: communicate with the data api to retrieve a list of Roles
-            //curl https://localhost:44342/api/RoleData/ListRoles
+            //objective: communicate with the data api to retrieve a list of Prescriptions
+            //curl https://localhost:44342/api/PrescriptionData/ListPrescriptions
 
-            string url = "RoleData/ListRoles";
+            string url = "PrescriptionData/ListPrescriptions";
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            IEnumerable<RoleDto> staffs = response.Content.ReadAsAsync<IEnumerable<RoleDto>>().Result;
+            IEnumerable<PrescriptionDto> staffs = response.Content.ReadAsAsync<IEnumerable<PrescriptionDto>>().Result;
 
             return View(staffs);
         }
 
 
-        // GET: Role/Details/5
+        // GET: Prescription/Details/5
         public ActionResult Details(int id)
         {
-            DetailsRole ViewModel = new DetailsRole();
+            DetailsPrescription ViewModel = new DetailsPrescription();
 
-            string url = "RoleData/FindRole/" + id;
+            string url = "PrescriptionData/FindPrescription/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
 
-            RoleDto SelectedRole = response.Content.ReadAsAsync<RoleDto>().Result;
+            PrescriptionDto SelectedPrescription = response.Content.ReadAsAsync<PrescriptionDto>().Result;
 
-            ViewModel.SelectedRole = SelectedRole;
+            ViewModel.SelectedPrescription = SelectedPrescription;
 
 
-            url = "StaffData/ListStaffsForRole/" + id;
+            url = "StaffData/ListStaffsForPrescription/" + id;
             response = client.GetAsync(url).Result;
             IEnumerable<StaffDto> workedStaffs = response.Content.ReadAsAsync<IEnumerable<StaffDto>>().Result;
 
@@ -104,33 +104,33 @@ namespace HospitalProject_Group3.Controllers
         }
 
 
-        // GET: Role/New
+        // GET: Prescription/New
         /*[Authorize]*/
         public ActionResult New()
         {
-            
+            /*
             string url = "DepartmentData/ListDepartments";
             HttpResponseMessage response = client.GetAsync(url).Result;
             IEnumerable<DepartmentDto> DepartmentOptions = response.Content.ReadAsAsync<IEnumerable<DepartmentDto>>().Result;
-
             return View(DepartmentOptions);
-            
+            */
 
-            /*return View();*/
+            return View();
         }
 
-        // POST: Role/Create
+
+        // POST: Prescription/Create
         [HttpPost]
         /*[Authorize]*/
-        public ActionResult Create(Role role)
+        public ActionResult Create(Prescription prescription)
         {
             GetApplicationCookie();//get token credentials
-            //objective: add a new role into our system using the API
-            //curl -H "Content-Type:application/json" -d @role.json https://localhost:44342/api/RoleData/AddRole 
-            string url = "RoleData/AddRole";
+            //objective: add a new prescription into our system using the API
+            //curl -H "Content-Type:application/json" -d @prescription.json https://localhost:44342/api/PrescriptionData/AddPrescription 
+            string url = "PrescriptionData/AddPrescription";
 
 
-            string jsonPayload = jss.Serialize(role);
+            string jsonPayload = jss.Serialize(prescription);
 
             Debug.WriteLine("the json payload is :", jsonPayload);
 
@@ -149,40 +149,39 @@ namespace HospitalProject_Group3.Controllers
         }
 
 
-        // GET: Role/Edit/5
+        // GET: Prescription/Edit/5
         /*[Authorize]*/
         public ActionResult Edit(int id)
         {
-            UpdateRole ViewModel = new UpdateRole();
+            UpdatePrescription ViewModel = new UpdatePrescription();
 
-            //get the existing role information
-            //curl https://localhost:44349/api/RoleData/FindRole/{id}
-            string url = "RoleData/FindRole/" + id;
+            //get the existing prescription information
+            //curl https://localhost:44349/api/PrescriptionData/FindPrescription/{id}
+            string url = "PrescriptionData/FindPrescription/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-            RoleDto SelectedRole = response.Content.ReadAsAsync<RoleDto>().Result;
-            ViewModel.SelectedRole = SelectedRole;
+            PrescriptionDto SelectedPrescription = response.Content.ReadAsAsync<PrescriptionDto>().Result;
+            ViewModel.SelectedPrescription = SelectedPrescription;
 
-            
+            /*
             url = "DepartmentData/ListDepartments/";
             response = client.GetAsync(url).Result;
             IEnumerable<DepartmentDto> departmentOptions = response.Content.ReadAsAsync<IEnumerable<DepartmentDto>>().Result;
-
             ViewModel.DepartmentOptions = departmentOptions;
-            
+            */
 
             return View(ViewModel);
         }
 
 
-        // POST: Role/Update/5
+        // POST: Prescription/Update/5
         [HttpPost]
         /*[Authorize]*/
-        public ActionResult Update(int id, Role role)
+        public ActionResult Update(int id, Prescription prescription)
         {
             GetApplicationCookie();//get token credentials
 
-            string url = "RoleData/UpdateRole/" + id;
-            string jsonPayload = jss.Serialize(role);
+            string url = "PrescriptionData/UpdatePrescription/" + id;
+            string jsonPayload = jss.Serialize(prescription);
 
             HttpContent content = new StringContent(jsonPayload);
             content.Headers.ContentType.MediaType = "application/json";
@@ -198,29 +197,29 @@ namespace HospitalProject_Group3.Controllers
             }
         }
 
-        // GET: Role/DeleteConfirm/5
+        // GET: Prescription/DeleteConfirm/5
         /*[Authorize]*/
         public ActionResult DeleteConfirm(int id)
         {
-            // get the existing role information
-            //curl https://localhost:44342/api/RoleData/FindRole/{id}
-            string url = "RoleData/FindRole/" + id;
+            // get the existing prescription information
+            //curl https://localhost:44342/api/PrescriptionData/FindPrescription/{id}
+            string url = "PrescriptionData/FindPrescription/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
-            RoleDto selectedRole = response.Content.ReadAsAsync<RoleDto>().Result;
+            PrescriptionDto selectedPrescription = response.Content.ReadAsAsync<PrescriptionDto>().Result;
 
-            return View(selectedRole);
+            return View(selectedPrescription);
 
         }
 
-        // POST: Role/Delete/5
+        // POST: Prescription/Delete/5
         [HttpPost]
         /*[Authorize]*/
         public ActionResult Delete(int id)
         {
             GetApplicationCookie();//get token credentials
-            //objective: delete the selected role from our system using the API
-            //curl -d "" https://localhost:44342/api/RoleData/DeleteRole/{id}
-            string url = "RoleData/DeleteRole/" + id;
+            //objective: delete the selected prescription from our system using the API
+            //curl -d "" https://localhost:44342/api/PrescriptionData/DeletePrescription/{id}
+            string url = "PrescriptionData/DeletePrescription/" + id;
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
             HttpResponseMessage response = client.PostAsync(url, content).Result;

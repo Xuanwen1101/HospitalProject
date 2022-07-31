@@ -1,25 +1,38 @@
-﻿@model HospitalProject_Group3.Models.PatientDto
+﻿@model HospitalProject_Group3.Models.ViewModels.UpdatePatient
 @{
     ViewBag.Title = "Edit";
 }
 
 <h2>Update Patient</h2>
-<form action="/Patient/Update/@Model.PatientID" method="POST" enctype="multipart/form-data">
+<form action="/Patient/Update/@Model.SelectedPatient.PatientID" method="POST" enctype="multipart/form-data">
     <div style="display:none;">
         @* Pass through the Shift ID *@
-        <input type="text" name="PatientID" value="@Model.PatientID" />
+        <input type="text" name="PatientID" value="@Model.SelectedPatient.PatientID" />
     </div>
     <div>
-    <label>First Name:</label> <input type="text" name="PatientFName" value="@Model.PatientFName" />
+        <label>First Name:</label> <input type="text" name="PatientFName" value="@Model.SelectedPatient.PatientFName" />
     </div>
     <div>
-        <label>Last Name:</label> <input type="text" name="PatientLName" value="@Model.PatientLName" />
+        <label>Last Name:</label> <input type="text" name="PatientLName" value="@Model.SelectedPatient.PatientLName" />
     </div>
     <div>
-        <label>Phone number:</label><input type="text" name="PhoneNumber" value="@Model.PhoneNumber" />
+        <label>Gender:</label>
+        <select name="Gender">
+            <option value=1>Female</option>
+            <option value=0>Male</option>
+        </select>
     </div>
     <div>
-        <label>Email:</label><input type="text" name="Email" value="@Model.Email" />
+        <label>Phone number:</label><input type="text" name="PhoneNumber" value="@Model.SelectedPatient.PhoneNumber" />
+    </div>
+    <div>
+        <label>Email:</label><input type="text" name="Email" value="@Model.SelectedPatient.Email" />
+    </div>
+    <div>
+        <label>Date of Birth:</label> <input type="date" name="BornDate" value="@Model.SelectedPatient.BornDate.ToString("yyyy-MM-dd")"/>
+    </div>
+    <div>
+        <label>Insurance ID:</label> <input type="number" name="InsuranceID" value="@Model.SelectedPatient.InsuranceID"/>
     </div>
 
     <div style="padding-top: 10px; padding-bottom: 20px; ">
@@ -30,6 +43,6 @@
     </div>
 </form>
 <div style="margin-top:50px;">
-    <a class="navlink" href="/Patient/Details/@Model.PatientID">Back to The Patient's Detail</a>
+    <a class="navlink" href="/Patient/Details/@Model.SelectedPatient.PatientID">Back to The Patient's Detail</a>
 </div>
 

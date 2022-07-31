@@ -171,6 +171,9 @@ namespace HospitalProject_Group3.Controllers
             string url = "InsuranceData/FindInsurance" + id;
             HttpResponseMessage response = client.GetAsync(url).Result; 
             
+            string url = "InsuranceData/FindInsurance/" + id;
+
+            HttpResponseMessage response = client.GetAsync(url).Result;
             InsuranceDto selectedInsurance = response.Content.ReadAsAsync<InsuranceDto>().Result;
             return View(selectedInsurance);
         }
