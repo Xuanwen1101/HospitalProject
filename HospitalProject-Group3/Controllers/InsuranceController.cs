@@ -169,7 +169,8 @@ namespace HospitalProject_Group3.Controllers
         {
             // get the existing role information
             //curl https://localhost:44342/api/InsuranceData/FindInsurance/{id}
-            string url = "InsuranceData/FindInsurance" + id;
+            string url = "InsuranceData/FindInsurance/" + id;
+
             HttpResponseMessage response = client.GetAsync(url).Result;
             InsuranceDto selectedInsurance = response.Content.ReadAsAsync<InsuranceDto>().Result;
 
