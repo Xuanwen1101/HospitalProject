@@ -180,17 +180,16 @@ namespace HospitalProject_Group3.Controllers
         /*[Authorize]*/
         public IHttpActionResult DeleteInsurance(int id)
         {
-            Insurance Insurance = db.Insurances.Find(id);
-
-            if (Insurance == null)
+            Insurance insurance = db.Insurances.Find(id);
+            if (insurance == null)
             {
                 return NotFound();
             }
 
-            db.Insurances.Remove(Insurance);
+            db.Insurances.Remove(insurance);
             db.SaveChanges();
 
-            return Ok();
+            return Ok(insurance);
         }
 
 
