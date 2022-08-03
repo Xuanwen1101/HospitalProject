@@ -25,14 +25,14 @@ namespace HospitalProject_Group3.Controllers
             List<MedicalRecordDto> MedicalRecordDtos = new List<MedicalRecordDto>();
 
 
-            MedicalRecord.ForEach(a => MedicalRecordDtos.Add(new MedicalRecordDto()
+            MedicalRecord.ForEach(c => MedicalRecordDtos.Add(new MedicalRecordDto()
             {
-                RecordID = a.RecordID,
-                RecordDetail = a.RecordDetail,
-                RecordDate = a.RecordDate,
-                PatientID = a.Patient.PatientID,
-                PatientFName = a.Patient.PatientFName,
-                PatientLName = a.Patient.PatientLName
+                RecordID = c.RecordID,
+                RecordDetail = c.RecordDetail,
+                RecordDate = c.RecordDate,
+                PatientID = c.Patient.PatientID,
+                PatientFName = c.Patient.PatientFName,
+                PatientLName = c.Patient.PatientLName
             }));
 
             return (MedicalRecordDtos);
