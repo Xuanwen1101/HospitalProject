@@ -192,6 +192,7 @@
     <Compile Include="Controllers\InsuranceController.cs" />
     <Compile Include="Controllers\InsuranceDataController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MedicalRecordDataController.cs" />
     <Compile Include="Controllers\MedicationController.cs" />
     <Compile Include="Controllers\MedicationDataController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
