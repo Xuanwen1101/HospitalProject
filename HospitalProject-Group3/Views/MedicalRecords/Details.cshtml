@@ -1,0 +1,17 @@
+﻿
+@model HospitalProject_Group3.Models.MedicalRecordDto
+
+
+@{
+    ViewBag.Title = "View";
+}
+
+
+<a href="/MedicalRecords/List">Go back to list</a>
+<div>
+    <a style="color: #ec3838;" href="/DonorTransplant/DeleteConfirm/@Model.SelectedMedicalRecord">Delete This Medical Record</a>
+</div>
+
+<h2>@Model.RecordID</h2>
+<p>@Model.RecordDetail</p>
+<p>@Model.RecordDate</p>

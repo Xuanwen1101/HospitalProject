@@ -1,0 +1,27 @@
+﻿
+@model IEnumerable<HospitalProject_Group3.Models.DonorTransplantDto>
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>Add New Donor</h2>
+
+<form action="/DonorTransplant/Create" method="POST">
+    <div>
+        <label>Organ Type:</label> <input type="text" name="OrganType" />
+    </div>
+    <div>
+        <label>SurgeryPlan:</label> <input type="text" name="SurgeryPlan" />
+    </div>
+    <div>
+        <label>WaitListNumber:</label> <input type="text" name="WaitListNumber" />
+    </div>
+    <div>
+        <label>Patient ID:</label> <input type="text" name="PatientID" />
+    </div>
+    <div>
+        <input type="submit" value="Add DonorTransplant" />
+
+    </div>
+</form>
+
