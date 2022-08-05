@@ -1,0 +1,45 @@
+﻿@model HospitalProject_Group3.Models.ViewModels.DetailsPrescription
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<h2>Prescription Details</h2>
+
+<div>
+    <a class="navlink" href="/Prescription/List">Back To Prescriptions List</a>
+</div>
+<div>
+    <a style="color: #ec3838;" href="/Prescription/DeleteConfirm/@Model.SelectedPrescription.PrescriptionID">
+        Delete This
+        Prescription
+    </a>
+</div>
+<div>
+    <a style="color: #8338ec;" href="/Prescription/Edit/@Model.SelectedPrescription.PrescriptionID">
+        Update This
+        Prescription
+    </a>
+</div>
+
+<div id="containershow">
+    <h2 style="color: #0a9396 ">@Model.SelectedPrescription.Patients</h2>
+    <div>
+        <label>Prescription Patients:</label> <a href="/Prescription/Details/@Model.SelectedPrescription.Patients">
+            @Model.SelectedPrescription.Patients
+        </a>
+    </div>
+
+    <div style="margin-top:100px;">
+        <h3>
+            Patients who have been prescribed with <span style="color: #0a9396 ">@Model.SelectedMedication.MedicationName</span>:
+        </h3>
+        @foreach (var patients in Model.PrescribedPatients)
+        {
+            <div>
+                <a href="/Patient/Details/@patient.PatientID">@patient.PatientFName @patient.PatientLName</a>
+            </div>
+        }
+    </div>
+
+</div>

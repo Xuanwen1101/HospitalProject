@@ -108,15 +108,15 @@ namespace HospitalProject_Group3.Controllers
         /*[Authorize]*/
         public ActionResult New()
         {
-            /*
+            
             string url = "DepartmentData/ListDepartments";
             HttpResponseMessage response = client.GetAsync(url).Result;
             IEnumerable<DepartmentDto> DepartmentOptions = response.Content.ReadAsAsync<IEnumerable<DepartmentDto>>().Result;
 
             return View(DepartmentOptions);
-            */
+            
 
-            return View();
+            /*return View();*/
         }
 
         // POST: Role/Create
@@ -162,13 +162,13 @@ namespace HospitalProject_Group3.Controllers
             RoleDto SelectedRole = response.Content.ReadAsAsync<RoleDto>().Result;
             ViewModel.SelectedRole = SelectedRole;
 
-            /*
+            
             url = "DepartmentData/ListDepartments/";
             response = client.GetAsync(url).Result;
             IEnumerable<DepartmentDto> departmentOptions = response.Content.ReadAsAsync<IEnumerable<DepartmentDto>>().Result;
 
             ViewModel.DepartmentOptions = departmentOptions;
-            */
+            
 
             return View(ViewModel);
         }

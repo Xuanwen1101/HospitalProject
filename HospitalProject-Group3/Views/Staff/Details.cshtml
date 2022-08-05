@@ -59,20 +59,23 @@
 
     <div style="margin-top:100px;">
         <h3>Appointments had by <span style="color: #0a9396 ">@Model.SelectedStaff.StaffFName @Model.SelectedStaff.StaffLName</span>:</h3>
-        @*@foreach (var appointment in Model.HadAppointments)
+        @foreach (var appointment in Model.HadAppointments)
         {
-            <div>
-                <a href="/Staff/Details/@appointment.AppointmentID">@appointment.AppointmentID</a>
-            </div>
-        }*@
+    <div>
+        <a href="/Appointment/Details/@appointment.AppointmentID">
+            At @appointment.AppointmentDateTime.ToString("yyyy-MM-dd") with @appointment.PatientFName @appointment.PatientLName
+        </a>
+    </div>
+        }
     </div>
 
     <div style="margin-top:100px;">
         <h3>Prescriptions created by <span style="color: #0a9396 ">@Model.SelectedStaff.StaffFName @Model.SelectedStaff.StaffLName</span>:</h3>
-       @* @foreach (var prescription in Model.CreatedPrescriptions)
+        @*Waiting for ListPrescriptionsForStaff function in PrescriptionDataController*@
+        @* @foreach (var prescription in Model.CreatedPrescriptions)
         {
             <div>
-                <a href="/Staff/Details/@prescription.PrescriptionID">@prescription.PrescriptionID</a>
+                <a href="/Prescription/Details/@prescription.PrescriptionID">@prescription.PrescriptionID</a>
             </div>
         }*@
     </div>

@@ -40,6 +40,36 @@ namespace HospitalProject_Group3.Controllers
             return AppointmentDtos;
         }
 
+        /// <summary>
+        /// Gathers information about all Appointments related to the selected Staff ID
+        /// </summary>
+        /// <returns>
+        /// HEADER: 200 (OK)
+        /// CONTENT: all Appointments in the database matched with the selected Staff ID
+        /// </returns>
+        /// <param name="id">Staff ID.</param>
+        /// <example>
+        /// GET: api/AppointmentData/ListAppointmentsForStaff/3
+        /// </example>
+        [HttpGet]
+        [ResponseType(typeof(AppointmentDto))]
+        public IHttpActionResult ListAppointmentsForStaff(int id)
+        {
+            List<Appointment> Appointments = db.Appointments.Where(m => m.StaffID == id).ToList();
+            List<AppointmentDto> AppointmentDtos = new List<AppointmentDto>();
+
+            Appointments.ForEach(a => AppointmentDtos.Add(new AppointmentDto()
+            {
+                AppointmentID = a.AppointmentID,
+                AppointmentDateTime = a.AppointmentDateTime,
+                PatientID = a.Patient.PatientID,
+                PatientFName = a.Patient.PatientFName,
+                PatientLName = a.Patient.PatientLName
+            }));
+
+            return Ok(AppointmentDtos);
+        }
+
         // GET: api/AppointmentData/FindAppointment/5
         [ResponseType(typeof(Appointment))]
         [HttpGet]

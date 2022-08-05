@@ -131,6 +131,7 @@ namespace HospitalProject_Group3.Controllers
             MedicationDto SelectedMedication = response.Content.ReadAsAsync<MedicationDto>().Result;
             ViewModel.SelectedMedication = SelectedMedication;
 
+
             return View(ViewModel);
         }
 
@@ -148,7 +149,6 @@ namespace HospitalProject_Group3.Controllers
             HttpContent content = new StringContent(jsonPayload);
             content.Headers.ContentType.MediaType = "application/json";
             HttpResponseMessage response = client.PostAsync(url, content).Result;
-            Debug.WriteLine(content);
 
             //update request is successful, and we have image data
             if (response.IsSuccessStatusCode)
@@ -168,10 +168,9 @@ namespace HospitalProject_Group3.Controllers
         {
             // get the existing Medication information
             //curl https://localhost:44342/api/MedicationData/FindMedication/{id}
-            string url = "MedicationData/FindMedication" + id;
+            string url = "MedicationData/FindMedication/" + id;
             HttpResponseMessage response = client.GetAsync(url).Result;
             MedicationDto selectedMedication = response.Content.ReadAsAsync<MedicationDto>().Result;
-
             return View(selectedMedication);
 
         }
