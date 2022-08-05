@@ -1,0 +1,26 @@
+﻿
+@model IEnumerable<HospitalProject_Group3.Models.MedicalRecordDto>
+@{
+    ViewBag.Title = "List";
+}
+<h2>List of Donor</h2>
+
+<div>
+    <a class="navlink" href="/MedicalRecords/New">Add a New Medical Record</a>
+</div>
+
+
+<div id="containerlist">
+    @foreach (var Medical in Model)
+    {
+        <h2><a href="/MedicalRecords/Details/@Medical.RecordID"> @Medical.RecordDetail</a></h2>
+        <p>Date: @Medical.RecordDate</p>
+        <p>Patient First name: @Medical.PatientFName</p>
+        <p>Patient Last Name: @Medical.PatientLName</p>
+
+
+    }
+</div>
+
+
+

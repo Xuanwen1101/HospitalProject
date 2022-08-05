@@ -1,0 +1,41 @@
+﻿@model HospitalProject_Group3.Models.DonorTransplantDto;
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h2>Update DonorTransplant</h2>
+<form action="/DonorTransplantsData/UpdateDonorTransplant/@Model.Selected.DonorTransplantID" method="POST" enctype="multipart/form-data">
+    <div style="display:none;">
+        @* Pass through the DonorTransplantID *@
+        <input type="text" name="DonorTransplantID" value="@Model.Selected.DonorTransplantID" />
+    </div>
+
+    <div>
+        <label>DonorTransplant:</label>
+
+        <select name="DonorTransplant">
+            @foreach (var DonorTransplant in Model.DonorTransplantOptions)
+            {
+                string selected = "";
+                if (DonorTransplant == Model.SelectedDonorTransplantDonorTransplantID.ToString())
+                {
+                    selected = "selected";
+                }
+                <option value="@DonorTransplant" @selected>@DonorTransplant</option>
+
+            }
+        </select>
+    </div>
+
+
+    <div>
+        <input type="submit" value="Update Shift" />
+
+    </div>
+</form>
+<div style="margin-top:50px;">
+    <a class="navlink" href="/DonorTransplant/Details/@Model.Selected.DonorTransplantID">Back to The DonorTransplant's Detail</a>
+</div>
+

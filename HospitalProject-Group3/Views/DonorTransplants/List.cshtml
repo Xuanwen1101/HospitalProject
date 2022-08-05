@@ -1,0 +1,23 @@
+﻿@model IEnumerable<HospitalProject_Group3.Models.DonorTransplantDto>
+@{
+    ViewBag.Title = "List";
+}
+
+<h2>List of Donor</h2>
+
+<div>
+    <a class="navlink" href="/DonorTransplants/New">Add a New DonorTransplants</a>
+</div>
+
+
+<div id="containerlist">
+    @foreach (var DonorTransplants in Model)
+    {
+        <h2><a href="/DonorTransplants/Details/@DonorTransplants.DonorTransplantID"> @DonorTransplants.OrganType</a></h2>
+        <p>Plan: @DonorTransplants.WaitListNumber</p>
+        <p>Patient First name: @DonorTransplants.PatientFName</p>
+        <p>Patient Last Name: @DonorTransplants.PatientLName</p>
+
+
+    }
+</div>

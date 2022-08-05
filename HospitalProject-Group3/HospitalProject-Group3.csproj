@@ -182,10 +182,14 @@
     <Compile Include="Controllers\BillDataController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\DepartmentDataController.cs" />
+    <Compile Include="Controllers\DonorTransplantsController.cs" />
+    <Compile Include="Controllers\DonorTransplantsDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InsuranceController.cs" />
     <Compile Include="Controllers\InsuranceDataController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MedicalReacordsController.cs" />
+    <Compile Include="Controllers\MedicalRecordsDataController.cs" />
     <Compile Include="Controllers\MedicationController.cs" />
     <Compile Include="Controllers\MedicationDataController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
@@ -241,7 +245,9 @@
     <Compile Include="Models\ViewModels\DetailsShift.cs" />
     <Compile Include="Models\ViewModels\DetailsPatient.cs" />
     <Compile Include="Models\ViewModels\DetailsStaff.cs" />
+    <Compile Include="Models\ViewModels\DonorTransplant.cs" />
     <Compile Include="Models\ViewModels\UpdateDepartment.cs" />
+    <Compile Include="Models\ViewModels\updatedonor.cs" />
     <Compile Include="Models\ViewModels\UpdateInsurance.cs" />
     <Compile Include="Models\ViewModels\UpdatePrescription.cs" />
     <Compile Include="Models\ViewModels\UpdateAppointment.cs" />
@@ -368,6 +374,17 @@
     <Content Include="Views\Prescriptions\Error.cshtml" />
     <Content Include="Views\Prescriptions\List.cshtml" />
     <Content Include="Views\Prescriptions\New.cshtml" />
+    <Content Include="Views\DonorTransplants\List.cshtml" />
+    <Content Include="Views\DonorTransplants\New.cshtml" />
+    <Content Include="Views\DonorTransplants\Error.cshtml" />
+    <Content Include="Views\DonorTransplants\Details.cshtml" />
+    <Content Include="Views\DonorTransplants\DeleteConfirm.cshtml" />
+    <Content Include="Views\MedicalReacords\New.cshtml" />
+    <Content Include="Views\MedicalReacords\List.cshtml" />
+    <Content Include="Views\MedicalReacords\Edit.cshtml" />
+    <Content Include="Views\MedicalReacords\Details.cshtml" />
+    <Content Include="Views\MedicalReacords\DeleteConfirm.cshtml" />
+    <Content Include="Views\DonorTransplants\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

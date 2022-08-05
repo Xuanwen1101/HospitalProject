@@ -7,8 +7,8 @@ namespace HospitalProject_Group3.Models.ViewModels
 {
     public class UpdatePatient
     {
-        public PatientDto SelectedPatient { get; set; }
+        public DonorTransplantDto DonorTransplantID { get; set; }
 
-        public IEnumerable<InsuranceDto> InsuranceOptions { get; set; }
+        public IEnumerable<DonorTransplantDto> Options { get; set; }
     }
 }

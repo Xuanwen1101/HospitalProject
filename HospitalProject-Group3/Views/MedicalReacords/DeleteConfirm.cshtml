@@ -1,0 +1,20 @@
+﻿@model HospitalProject_Group3.Models.MedicalRecordDto
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+<h2>DeleteConfirm</h2>
+
+<h2>Are you sure you want to delete?</h2>
+
+<p>This action cannot be undone.</p>
+
+<
+
+<form method="POST" action="DonorTransplant/Delete/@Model.RecordID">
+
+    <button class="delbutton">
+        Confirm Delete
+    </button>
+
+</form>
