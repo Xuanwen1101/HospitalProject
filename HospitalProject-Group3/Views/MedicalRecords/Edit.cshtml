@@ -1,0 +1,23 @@
+﻿
+@model HospitalProject_Group3.Models.MedicalRecordDto
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h2>Update Medication</h2>
+
+<form action="/Medication/Update/@Model.SelectedMedicalRecord.MedicalRecordDto" method="POST">
+    <div style="display:none;">
+        @* Pass through the Shift ID *@
+        <input type="text" name="MedicationID" value="@Model.SelectedMedicalRecord.RecordID " />
+    </div>
+    <div>
+        <label>Medication Brand:</label> <input type="text" name="MedicationBrand" value="@Model.SelectedMedicalRecord.RecordDetail" />
+    </div>
+   
+    <div>
+ 
+</form>
+
