@@ -1,0 +1,17 @@
+﻿
+@model HospitalProject_Group3.Models.DonorTransplantDto
+
+
+@{
+    ViewBag.Title = "View";
+}
+
+
+<a href="/DonorTransplants/List">Go back to list</a>
+
+
+<h2>@Model.PatientID</h2>
+<p>@Model.PatientFName</p>
+<p>@Model.PatientLName</p>
+<p>@Model.OrganType</p>
+<div> @Model.SurgeryPlan</div>
