@@ -67,8 +67,9 @@ namespace HospitalProject_Group3.Controllers
             return View();
         }
 
+        // comment code out because it fails the project build
         // POST: DonorTransplant/Create
-        [HttpPost]
+        /*[HttpPost]
         public ActionResult Create(DonorTransplant DonorTransplant)
         {
 
@@ -91,7 +92,7 @@ namespace HospitalProject_Group3.Controllers
                 return RedirectToAction("Error"); ;
             }
 
-        }
+        }*/
 
         // Get: DonorTransplant/Edit/5
         [HttpPost]
@@ -110,8 +111,10 @@ namespace HospitalProject_Group3.Controllers
             return View(selectedDonorTransplant);
 
         }
+
+        // comment code out because it fails the project build
         // POST: Patient/Update/5
-        [HttpPost]
+        /*[HttpPost]
         public ActionResult Update(int id, DonorTransplant DonorTransplant)
         {
 
@@ -137,7 +140,7 @@ namespace HospitalProject_Group3.Controllers
 
                 return RedirectToAction("Error");
             }
-        }
+        }*/
 
 
         // GET: DonorTransplant/Delete/5

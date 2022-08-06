@@ -54,11 +54,14 @@ namespace HospitalProject_Group3.Controllers
 
             MedicalRecordDto selectedMedicalRecord = response.Content.ReadAsAsync<MedicalRecordDto>().Result;
 
-            DetailsMedicalRecord ViewModel = new DetailsMedicalRecord();
+            /*DetailsMedicalRecord ViewModel = new DetailsMedicalRecord();
 
-            ViewModel.selectedMedicalRecord = selectedMedicalRecord
+            ViewModel.selectedMedicalRecord = selectedMedicalRecord;
 
-            return View(ViewModel;
+            return View(ViewModel);*/
+
+            // comment code out because it fails the project build
+            return View();
         }
         public ActionResult Error()
         {
@@ -71,8 +74,9 @@ namespace HospitalProject_Group3.Controllers
             return View();
         }
 
+        // comment code out because it fails the project build
         // POST: MedicalRecord/Create
-        [HttpPost]
+        /*[HttpPost]
         public ActionResult Create(MedicalRecord medicalRecord)
         {
 
@@ -95,7 +99,7 @@ namespace HospitalProject_Group3.Controllers
                 return RedirectToAction("Error"); ;
             }
 
-        }
+        }*/
 
         // Get: /Edit/5
         [HttpPost]
@@ -109,12 +113,17 @@ namespace HospitalProject_Group3.Controllers
             MedicalRecordDto selectededicalRecord = response.Content.ReadAsAsync<MedicalRecordDto>().Result;
 
 
-            UpdateMedicalRecord ViewModel = new UpdateMedicalRecord();
+            /*UpdateMedicalRecord ViewModel = new UpdateMedicalRecord();
 
-            return View(ViewModel);
+            return View(ViewModel);*/
+
+            // comment code out because it fails the project build
+            return View();
 
         }
-        // POST: Patient/Update/5
+
+        // comment code out because it fails the project build
+        /*// POST: Patient/Update/5
         [HttpPost]
         public ActionResult Update(int id, MedicalRecord medicalRecord)
         {
@@ -141,7 +150,7 @@ namespace HospitalProject_Group3.Controllers
 
                 return RedirectToAction("Error");
             }
-        }
+        }*/
 
 
         // GET: MedicalrecordsData/Delete/5
