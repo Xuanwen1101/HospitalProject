@@ -80,12 +80,20 @@ namespace HospitalProject_Group3.Controllers
             InsuranceDto SelectedInsurance = response.Content.ReadAsAsync<InsuranceDto>().Result;
 
             ViewModel.SelectedInsurance = SelectedInsurance;
+
+            //show associated Patient with this Insurance
+            url = "PatientData/ListPatientsforInsurance/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<PatientDto> listpatients = response.Content.ReadAsAsync<IEnumerable<PatientDto>>().Result;
+
+            ViewModel.ListPatient = listpatients;
+
             return View(ViewModel);
         }
 
 
         // GET: Insurance/New
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult New()
         {
             return View();
@@ -93,7 +101,7 @@ namespace HospitalProject_Group3.Controllers
 
         // POST: Insurance/Create
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult Create(Insurance insurance)
         {
             GetApplicationCookie();//get token credentials
@@ -120,7 +128,7 @@ namespace HospitalProject_Group3.Controllers
         }
 
         // GET: Insurance/Edit/5
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult Edit(int id)
         {
             UpdateInsurance ViewModel = new UpdateInsurance();
@@ -137,7 +145,7 @@ namespace HospitalProject_Group3.Controllers
 
         // POST: Insurance/Update/5
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult Update(int id, Insurance insurance)
         {
             GetApplicationCookie();//get token credentials
@@ -164,7 +172,7 @@ namespace HospitalProject_Group3.Controllers
         }
 
         // GET: Insurance/DeleteConfirm/5
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult DeleteConfirm(int id)
         {
             // get the existing role information
@@ -180,7 +188,7 @@ namespace HospitalProject_Group3.Controllers
 
         // POST: Insurance/Delete/5
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult Delete(int id)
         {
             GetApplicationCookie();//get token credentials

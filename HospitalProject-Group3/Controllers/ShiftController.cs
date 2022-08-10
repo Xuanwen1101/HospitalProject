@@ -113,7 +113,7 @@ namespace HospitalProject_Group3.Controllers
 
         // POST: Shift/Create
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult Create(Shift shift)
         {
             GetApplicationCookie();//get token credentials
@@ -139,7 +139,7 @@ namespace HospitalProject_Group3.Controllers
 
 
         // GET: Shift/Edit/5
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult Edit(int id)
         {
             UpdateShift ViewModel = new UpdateShift();
@@ -157,7 +157,7 @@ namespace HospitalProject_Group3.Controllers
 
         // POST: Shift/Update/5
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult Update(int id, Shift shift)
         {
             GetApplicationCookie();//get token credentials
@@ -180,7 +180,7 @@ namespace HospitalProject_Group3.Controllers
         }
 
         // GET: Shift/DeleteConfirm/5
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult DeleteConfirm(int id)
         {
             // get the existing shift information
@@ -195,7 +195,7 @@ namespace HospitalProject_Group3.Controllers
 
         // POST: Shift/Delete/5
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult Delete(int id)
         {
             GetApplicationCookie();//get token credentials

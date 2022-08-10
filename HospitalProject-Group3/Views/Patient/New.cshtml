@@ -1,40 +1,127 @@
-﻿
+﻿@model IEnumerable<HospitalProject_Group3.Models.InsuranceDto>
 @{
     ViewBag.Title = "New";
 }
 
 <h2>Add New Patient</h2>
-<form action="/Patient/Create" method="POST">
+<form action="/Patient/Create" method="POST" onsubmit="return validatePatient();">
     <div>
-        <label>First Name:</label> <input type="text" name="PatientFName" />
+        <label>First Name:</label> <input type="text" id="PatientFName" name="PatientFName" />
     </div>
     <div>
-        <label>Last Name:</label> <input type="text" name="PatientLName" />
+        <label>Last Name:</label> <input type="text" id="PatientLName" name="PatientLName" />
     </div>
     <div>
-        <label>Gender:</label>
-        <select name="Gender">
-            <option value=1>Female</option>
-            <option value=0>Male</option>
+        <label>Gender:</label> <input type="number" name="Gender" />
+    </div>
+    <div>
+        <label>Phone Number:</label> <input type="text" id="PhoneNumber" name="PhoneNumber" />
+    </div>
+    <div>
+        <label>Blood Type:</label> <input type="text" id="BloodType" name="BloodType" />
+    </div>
+    <div>
+        <label>Email:</label> <input type="text" id="Email" name="Email" />
+    </div>
+    <div>
+        <label>Date of Birth:</label> <input type="date" id="BornDate" name="BornDate" />
+    </div>
+    <div>
+        <label>Insurance ID:</label>
+        <!--<input type="number" id="InsuranceID" name="InsuranceID" /> -->
+
+        <select name="InsuranceID">
+            @foreach (var Insurance in Model)
+            {
+                <option value="@Insurance.InsuranceID">@Insurance.InsurancePlan</option>
+
+            }
         </select>
     </div>
     <div>
-        <label>Phone Number:</label> <input type="text" name="PhoneNumber" />
-    </div>
-    <div>
-        <label>Blood Type:</label> <input type="text" name="BloodType" />
-    </div>
-    <div>
-        <label>Email:</label> <input type="text" name="Email" />
-    </div>
-    <div>
-        <label>Date of Birth:</label> <input type="date" name="BornDate" />
-    </div>
-    <div>
-        <label>Insurance ID:</label> <input type="number" name="InsuranceID" />
+        <label>Medication ID:</label> <input type="number" name="Medication_MedicationID" />
     </div>
     <div>
         <input type="submit" value="Add Patient" />
 
     </div>
+
+    <div id="ErrorBox" style="display: none; color: #ec3838 "></div>
+
 </form>
+
+<script type="text/javascript">
+    //variable from HTML element
+    var PatientFName = document.getElementById('PatientFName');
+    var PatientLName = document.getElementById('PatientLName');
+    var PhoneNumber = document.getElementById('PhoneNumber');
+    var BloodType = document.getElementById('BloodType');
+    var Email = document.getElementById('Email');
+    var BornDate = document.getElementById('BornDate');
+
+    var errorbox = document.getElementById("ErrorBox");
+
+    function validatePatient() {
+        //check if PatientFName is ""
+        if (PatientFName.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Patient First Name must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+        //check if PatientLName is ""
+        if (PatientLName.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Patient Last Name must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+
+        //check if PhoneNumber is ""
+        if (PhoneNumber.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Phone Number must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+
+        //check if BloodType is ""
+        if (BloodType.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Blood Type must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+
+        //check if Email is ""
+        if (Email.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Email must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+
+        //check if BornDate is ""
+        if (BornDate.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Born Date must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+
+        if (PatientFName.value != "" && PatientLName.value != "" && PhoneNumber.value != "" && BloodType.value != "" && Email.value != "" && BornDate.value != "") {
+        }
+    }
+</script>

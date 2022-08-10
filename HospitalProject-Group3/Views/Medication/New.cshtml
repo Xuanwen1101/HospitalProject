@@ -5,25 +5,77 @@
 
 <h2>Add New Medication</h2>
 
-<form action="/Medication/Create" method="POST">
+<form action="/Medication/Create" method="POST" onsubmit="return validateMedication();">
     <div>
-        <label>Medication Brand:</label> <input type="text" name="MedicationBrand" />
+        <label>Medication Brand:</label> <input type="text" id="MedicationBrand" name="MedicationBrand" />
     </div>
     <div>
-        <label>Medication Name:</label> <input type="text" name="MedicationName" />
+        <label>Medication Name:</label> <input type="text" id="MedicationName" name="MedicationName" />
     </div>
     <div>
         <label>Detail:</label>
     </div>
     <div>
-        <textarea name="MedicationDetail" rows="5" cols="30" maxlength="500" placeholder="Type here..."></textarea>
+        <textarea id="MedicationDetail" name="MedicationDetail" rows="5" cols="30" maxlength="500" placeholder="Type here..."></textarea>
     </div>
     <div>
-        <label>Medicaiton Price:</label> <input type="text" name="Price" />
+        <label>Medicaiton Price:</label> <input type="text" id="Price" name="Price" />
     </div>
     <div>
         <input type="submit" value="Add Medication" />
 
     </div>
+
+    <div id="ErrorBox" style="display: none; color: #ec3838 "></div>
 </form>
 
+<script type="text/javascript">
+    //variable from HTML element
+    var MedicationBrand = document.getElementById('MedicationBrand');
+    var MedicationName = document.getElementById('MedicationName');
+    var MedicationDetail = document.getElementById('MedicationDetail');
+    var Price = document.getElementById('Price');
+
+    var errorbox = document.getElementById("ErrorBox");
+
+    function validateMedication() {
+        //check if MedicationBrand is ""
+        if (MedicationBrand.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Medication Brand must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+        //check if MedicationName is ""
+        if (MedicationName.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Medication Name must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+        //check if MedicationDetail is ""
+        if (MedicationDetail.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Medication Detail must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+        //check if Price is ""
+        if (Price.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Price must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+        if (MedicationBrand.value != "" && MedicationName.value != "" && MedicationDetail.value != "" && Price.value != "") {
+        }
+    }
+</script>

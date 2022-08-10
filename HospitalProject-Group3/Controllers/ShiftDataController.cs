@@ -159,7 +159,7 @@ namespace HospitalProject_Group3.Controllers
         /// </example>
         [ResponseType(typeof(void))]
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public IHttpActionResult UpdateShift(int id, Shift shift)
         {
             if (!ModelState.IsValid)
@@ -210,7 +210,7 @@ namespace HospitalProject_Group3.Controllers
         /// </example>
         [ResponseType(typeof(Shift))]
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public IHttpActionResult AddShift(Shift shift)
         {
             if (!ModelState.IsValid)
@@ -240,7 +240,7 @@ namespace HospitalProject_Group3.Controllers
         /// </example>
         [ResponseType(typeof(Shift))]
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public IHttpActionResult DeleteShift(int id)
         {
             Shift shift = db.Shifts.Find(id);

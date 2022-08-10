@@ -68,7 +68,11 @@ namespace HospitalProject_Group3.Controllers
         // GET: Patient/New
         public ActionResult New()
         {
-            return View();
+            string url = "InsuranceData/ListInsurances";
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            IEnumerable<InsuranceDto> InsuranceOptions = response.Content.ReadAsAsync<IEnumerable<InsuranceDto>>().Result;
+
+            return View(InsuranceOptions);
         }
 
         // POST: Patient/Create
