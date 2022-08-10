@@ -5,18 +5,18 @@
 
 <h2>Add New Staff</h2>
 
-<form action="/Staff/Create" method="POST">
+<form action="/Staff/Create" method="POST" onsubmit="return validateStaff();">
     <div>
-        <label>First Name:</label> <input type="text" name="StaffFName" />
+        <label>First Name:</label> <input type="text" id="StaffFName" name="StaffFName" />
     </div>
     <div>
-        <label>Last Name:</label> <input type="text" name="StaffLName" />
+        <label>Last Name:</label> <input type="text" id="StaffLName" name="StaffLName" />
     </div>
     <div>
         <label>Staff Bio:</label>
     </div>
     <div>
-        <textarea name="StaffBio" rows="5" cols="30" maxlength="500" placeholder="Type here..."></textarea>
+        <textarea name="StaffBio" id-="StaffBio" rows="5" cols="30" maxlength="500" placeholder="Type here..."></textarea>
     </div>
     <div>
         <label>Role Type:</label>
@@ -30,17 +30,94 @@
         </select>
     </div>
     <div>
-        <label>Hire Date:</label> <input type="date" name="HireDate" />
+        <label>Hire Date:</label> <input type="date" id="HireDate" name="HireDate" />
     </div>
     <div>
-        <label>Phone Number:</label> <input type="text" name="PhoneNumber" />
+        <label>Phone Number:</label> <input type="text" id="PhoneNumber" name="PhoneNumber" />
     </div>
     <div>
-        <label>Email:</label> <input type="text" name="Email" />
+        <label>Email:</label> <input type="text" name="Email" id="Email" />
     </div>
     <div>
         <input type="submit" value="Add Staff" />
 
     </div>
+
+    <div id="ErrorBox" style="display: none; color: #ec3838 "></div>
+
 </form>
 
+
+<script type="text/javascript">
+    //variable from HTML element
+    var StaffFName = document.getElementById('StaffFName');
+    var StaffLName = document.getElementById('StaffLName');
+    var StaffBio = document.getElementById('StaffBio');
+    var HireDate = document.getElementById('HireDate');
+    var PhoneNumber = document.getElementById('PhoneNumber');
+    var Email = document.getElementById('Email');
+
+    var errorbox = document.getElementById("ErrorBox");
+
+    function validateStaff() {
+        //check if StaffFName is ""
+        if (StaffFName.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Staff First Name must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+        //check if StaffLName is ""
+        if (StaffLName.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Staff Last Name must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+        //check if StaffBio is ""
+        if (StaffBio.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Staff Bio must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+        //check if HireDate is ""
+        if (HireDate.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Hire Date must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+
+        //check if PhoneNumber is ""
+        if (PhoneNumber.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Phone Number must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+
+        //check if Email is ""
+        if (Email.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Email must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+
+        if (StaffFName.value != "" && StaffLName.value != "" && StaffBio.value != "" && HireDate.value != "" && PhoneNumber.value != "" && Email.value != "") {
+        }
+    }
+</script>

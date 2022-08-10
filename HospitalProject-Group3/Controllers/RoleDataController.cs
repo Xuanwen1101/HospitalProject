@@ -128,7 +128,7 @@ namespace HospitalProject_Group3.Controllers
         /// </example>
         [ResponseType(typeof(void))]
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public IHttpActionResult UpdateRole(int id, Role role)
         {
             if (!ModelState.IsValid)
@@ -179,7 +179,7 @@ namespace HospitalProject_Group3.Controllers
         /// </example>
         [ResponseType(typeof(Role))]
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public IHttpActionResult AddRole(Role role)
         {
             if (!ModelState.IsValid)
@@ -209,7 +209,7 @@ namespace HospitalProject_Group3.Controllers
         /// </example>
         [ResponseType(typeof(Role))]
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public IHttpActionResult DeleteRole(int id)
         {
             Role role = db.Roles.Find(id);

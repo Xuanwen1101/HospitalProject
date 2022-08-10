@@ -95,7 +95,7 @@ namespace HospitalProject_Group3.Controllers
         /// </example>
         [ResponseType(typeof(Insurance))]
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public IHttpActionResult AddInsurance(Insurance insurance)
         {
             if (!ModelState.IsValid)
@@ -127,7 +127,7 @@ namespace HospitalProject_Group3.Controllers
         /// </example>
         [HttpPost]
         [ResponseType(typeof(void))]
-        /*[Authorize]*/
+        [Authorize]
         public IHttpActionResult UpdateInsurance(int id, Insurance insurance)
         {
             if (!ModelState.IsValid)
@@ -177,7 +177,7 @@ namespace HospitalProject_Group3.Controllers
         /// </example>
         [ResponseType(typeof(Insurance))]
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public IHttpActionResult DeleteInsurance(int id)
         {
             Insurance Insurance = db.Insurances.Find(id);

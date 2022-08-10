@@ -1,0 +1,65 @@
+﻿@model IEnumerable<HospitalProject_Group3.Models.PatientDto>
+
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>Add New Bill</h2>
+<form action="/Bill/Create" method="POST" onsubmit="return validateBill();">
+    <div>
+        <label>Patient ID:</label>
+        <!-- <input type="number" name="PatientID" /> -->
+        <select name="PatientID">
+            @foreach (var Patient in Model)
+            {
+                <option value="@Patient.PatientID">@Patient.PatientFName @Patient.PatientLName</option>
+
+            }
+        </select>
+    </div>
+    <div>
+        <label>Bill Detail:</label> <input type="text" id="BillDetail" name="BillDetail" />
+    </div>
+    <div>
+        <label>Total Cost:</label> <input type="text" id="TotalCost" name="TotalCost" />
+    </div>
+    <div>
+        <input type="submit" value="Add Bill" />
+    </div>
+
+    <div id="ErrorBox" style="display: none; color: #ec3838"></div>
+</form>
+
+<script type="text/javascript">
+    //variable from HTML element
+    var BillDetail = document.getElementById('BillDetail');
+    var TotalCost = document.getElementById('TotalCost');
+
+    var errorbox = document.getElementById("ErrorBox");
+
+    function validateBill() {
+        //check if BillDetail is ""
+        if (BillDetail.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Bill Detail must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+
+        //check if TotalCost is ""
+        if (TotalCost.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Total Cost must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+
+        if (Role.value != "" && TotalCost.value!= "") {
+        }
+    }
+</script>
+

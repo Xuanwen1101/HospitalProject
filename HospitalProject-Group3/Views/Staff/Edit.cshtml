@@ -4,22 +4,22 @@
 }
 
 <h2>Update Staff</h2>
-<form action="/Staff/Update/@Model.SelectedStaff.StaffID" method="POST" enctype="multipart/form-data">
+<form action="/Staff/Update/@Model.SelectedStaff.StaffID" method="POST" enctype="multipart/form-data" onsubmit="return validateStaff();">
     <div style="display:none;">
         @* Pass through the Staff ID *@
         <input type="text" name="StaffID" value="@Model.SelectedStaff.StaffID" />
     </div>
     <div>
-        <label>First Name:</label> <input type="text" name="StaffFName" value="@Model.SelectedStaff.StaffFName" />
+        <label>First Name:</label> <input type="text" id="StaffFName" name="StaffFName" value="@Model.SelectedStaff.StaffFName" />
     </div>
     <div>
-        <label>Last Name:</label> <input type="text" name="StaffLName" value="@Model.SelectedStaff.StaffLName" />
+        <label>Last Name:</label> <input type="text" id="StaffLName" name="StaffLName" value="@Model.SelectedStaff.StaffLName" />
     </div>
     <div>
         <label>Staff Bio:</label>
     </div>
     <div>
-        <textarea name="StaffBio" rows="5" cols="30" maxlength="500" placeholder="Type here...">@Model.SelectedStaff.StaffBio</textarea>
+        <textarea name="StaffBio" id-="StaffBio" rows="5" cols="30" maxlength="500" placeholder="Type here...">@Model.SelectedStaff.StaffBio</textarea>
     </div>
     <div>
         <label>Role:</label>
@@ -38,13 +38,13 @@
         </select>
     </div>
     <div>
-        <label>Hire Date:</label> <input type="date" name="HireDate" value="@Model.SelectedStaff.HireDate.ToString("yyyy-MM-dd")" />
+        <label>Hire Date:</label> <input type="date" id="HireDate" name="HireDate" value="@Model.SelectedStaff.HireDate.ToString("yyyy-MM-dd")" />
     </div>
     <div>
-        <label>Phone Number:</label> <input type="text" name="PhoneNumber" value="@Model.SelectedStaff.PhoneNumber" />
+        <label>Phone Number:</label> <input type="text" id="PhoneNumber" name="PhoneNumber" value="@Model.SelectedStaff.PhoneNumber" />
     </div>
     <div>
-        <label>Email:</label> <input type="text" name="Email" value="@Model.SelectedStaff.Email" />
+        <label>Email:</label> <input type="text" id="Email" name="Email" value="@Model.SelectedStaff.Email" />
     </div>
 
     <div style="padding-top: 10px; padding-bottom: 20px; ">
@@ -59,3 +59,76 @@
     <a class="navlink" href="/Staff/Details/@Model.SelectedStaff.StaffID">Back to The Staff's Detail</a>
 </div>
 
+<script type="text/javascript">
+    //variable from HTML element
+    var StaffFName = document.getElementById('StaffFName');
+    var StaffLName = document.getElementById('StaffLName');
+    var StaffBio = document.getElementById('StaffBio');
+    var HireDate = document.getElementById('HireDate');
+    var PhoneNumber = document.getElementById('PhoneNumber');
+    var Email = document.getElementById('Email');
+
+    var errorbox = document.getElementById("ErrorBox");
+
+    function validateStaff() {
+        //check if StaffFName is ""
+        if (StaffFName.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Staff First Name must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+        //check if StaffLName is ""
+        if (StaffLName.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Staff Last Name must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+        //check if StaffBio is ""
+        if (StaffBio.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Staff Bio must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+        //check if HireDate is ""
+        if (HireDate.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Hire Date must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+
+        //check if PhoneNumber is ""
+        if (PhoneNumber.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Phone Number must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+
+        //check if Email is ""
+        if (Email.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Email must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+
+        if (StaffFName.value != "" && StaffLName.value != "" && StaffBio.value != "" && HireDate.value != "" && PhoneNumber.value != "" && Email.value != "") {
+        }
+    }
+</script>

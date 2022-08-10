@@ -5,16 +5,49 @@
 
 <h2>Add New Insurance</h2>
 
-<form action="/Insurance/Create" method="POST">
+<form action="/Insurance/Create" method="POST" onsubmit="return validateInsurance();">
     <div>
-        <label>Company:</label> <input type="text" name="InsuranceCompany" />
+        <label>Company:</label> <input type="text" id="InsuranceCompany" name="InsuranceCompany" />
     </div>
     <div>
-        <label>Plan:</label> <input type="text" name="InsurancePlan" />
+        <label>Plan:</label> <input type="text" id="InsurancePlan" name="InsurancePlan" />
     </div>
     <div>
         <input type="submit" value="Add Insurance" />
 
     </div>
+    <div id="ErrorBox" style="display: none; color: #ec3838 "></div>
+
 </form>
 
+<script type="text/javascript">
+    //variable from HTML element
+    var InsuranceCompany = document.getElementById('InsuranceCompany');
+    var InsurancePlan = document.getElementById('InsurancePlan');
+
+    var errorbox = document.getElementById("ErrorBox");
+
+    function validateInsurance() {
+        //check if InsuranceCompany is ""
+        if (InsuranceCompany.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Insurance Company must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+        //check if InsurancePlan is ""
+        if (InsurancePlan.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Insurance Plan must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+  
+        if (InsuranceCompany.value != "" && InsurancePlan.value != "") {
+        }
+    }
+</script>

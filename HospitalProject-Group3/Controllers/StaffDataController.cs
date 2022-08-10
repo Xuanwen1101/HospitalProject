@@ -263,7 +263,7 @@ namespace HospitalProject_Group3.Controllers
         /// </example>
         [ResponseType(typeof(void))]
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public IHttpActionResult UpdateStaff(int id, Staff staff)
         {
             if (!ModelState.IsValid)
@@ -315,7 +315,7 @@ namespace HospitalProject_Group3.Controllers
         /// https://stackoverflow.com/questions/28369529/how-to-set-up-a-web-api-controller-for-multipart-form-data
 
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public IHttpActionResult UploadStaffPicture(int id)
         {
 
@@ -402,7 +402,7 @@ namespace HospitalProject_Group3.Controllers
         /// </example>
         [ResponseType(typeof(Staff))]
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public IHttpActionResult AddStaff(Staff staff)
         {
             if (!ModelState.IsValid)
@@ -432,7 +432,7 @@ namespace HospitalProject_Group3.Controllers
         /// </example>
         [ResponseType(typeof(Staff))]
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public IHttpActionResult DeleteStaff(int id)
         {
             Staff staff = db.Staffs.Find(id);

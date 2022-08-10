@@ -105,7 +105,7 @@ namespace HospitalProject_Group3.Controllers
 
 
         // GET: Role/New
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult New()
         {
             
@@ -121,7 +121,7 @@ namespace HospitalProject_Group3.Controllers
 
         // POST: Role/Create
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult Create(Role role)
         {
             GetApplicationCookie();//get token credentials
@@ -150,7 +150,7 @@ namespace HospitalProject_Group3.Controllers
 
 
         // GET: Role/Edit/5
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult Edit(int id)
         {
             UpdateRole ViewModel = new UpdateRole();
@@ -176,7 +176,7 @@ namespace HospitalProject_Group3.Controllers
 
         // POST: Role/Update/5
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult Update(int id, Role role)
         {
             GetApplicationCookie();//get token credentials
@@ -199,7 +199,7 @@ namespace HospitalProject_Group3.Controllers
         }
 
         // GET: Role/DeleteConfirm/5
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult DeleteConfirm(int id)
         {
             // get the existing role information
@@ -214,7 +214,7 @@ namespace HospitalProject_Group3.Controllers
 
         // POST: Role/Delete/5
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult Delete(int id)
         {
             GetApplicationCookie();//get token credentials

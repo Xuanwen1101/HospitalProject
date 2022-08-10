@@ -22,11 +22,11 @@
 
     <div>
         <h3>Patient has <span style="color: #0a9396 ">@Model.SelectedInsurance.InsuranceCompany</span> with @Model.SelectedInsurance.InsurancePlan :</h3>
-        @*@foreach (var appointment in Model.HadAppointments)
+        @foreach (var patient in Model.ListPatient)
             {
                 <div>
-                    <a href="/Staff/Details/@appointment.AppointmentID">@appointment.AppointmentID</a>
+                    <a href="/Patient/Details/@patient.PatientID">@patient.PatientFName @patient.PatientLName</a>
                 </div>
-            }*@
+            }
     </div>
 </div>

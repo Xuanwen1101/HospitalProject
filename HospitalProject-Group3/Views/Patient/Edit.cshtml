@@ -4,16 +4,16 @@
 }
 
 <h2>Update Patient</h2>
-<form action="/Patient/Update/@Model.SelectedPatient.PatientID" method="POST" enctype="multipart/form-data">
+<form action="/Patient/Update/@Model.SelectedPatient.PatientID" method="POST" enctype="multipart/form-data" onsubmit="return validatePatient();">
     <div style="display:none;">
         @* Pass through the Shift ID *@
         <input type="text" name="PatientID" value="@Model.SelectedPatient.PatientID" />
     </div>
     <div>
-        <label>First Name:</label> <input type="text" name="PatientFName" value="@Model.SelectedPatient.PatientFName" />
+        <label>First Name:</label> <input type="text" name="PatientFName" value="@Model.SelectedPatient.PatientFName" id="PatientFName" />
     </div>
     <div>
-        <label>Last Name:</label> <input type="text" name="PatientLName" value="@Model.SelectedPatient.PatientLName" />
+        <label>Last Name:</label> <input type="text" name="PatientLName" value="@Model.SelectedPatient.PatientLName" id="PatientLName" />
     </div>
     <div>
         <label>Gender:</label>
@@ -23,16 +23,16 @@
         </select>
     </div>
     <div>
-        <label>Phone number:</label><input type="text" name="PhoneNumber" value="@Model.SelectedPatient.PhoneNumber" />
+        <label>Phone number:</label><input type="text" id="PhoneNumber" name="PhoneNumber" value="@Model.SelectedPatient.PhoneNumber" />
     </div>
     <div>
         <label>Email:</label><input type="text" name="Email" value="@Model.SelectedPatient.Email" />
     </div>
     <div>
-        <label>Date of Birth:</label> <input type="date" name="BornDate" value="@Model.SelectedPatient.BornDate.ToString("yyyy-MM-dd")"/>
+        <label>Date of Birth:</label> <input type="date" id="BornDate" name="BornDate" value="@Model.SelectedPatient.BornDate.ToString("yyyy-MM-dd")" />
     </div>
     <div>
-        <label>Insurance ID:</label> <input type="number" name="InsuranceID" value="@Model.SelectedPatient.InsuranceID"/>
+        <label>Insurance ID:</label> <input type="number" name="InsuranceID" value="@Model.SelectedPatient.InsuranceID" />
     </div>
 
     <div style="padding-top: 10px; padding-bottom: 20px; ">
@@ -46,3 +46,67 @@
     <a class="navlink" href="/Patient/Details/@Model.SelectedPatient.PatientID">Back to The Patient's Detail</a>
 </div>
 
+<script type="text/javascript">
+    //variable from HTML element
+    var PatientFName = document.getElementById('PatientFName');
+    var PatientLName = document.getElementById('PatientLName');
+    var PhoneNumber = document.getElementById('PhoneNumber');
+    var Email = document.getElementById('Email');
+    var BornDate = document.getElementById('BornDate');
+
+    var errorbox = document.getElementById("ErrorBox");
+
+    function validatePatient() {
+        //check if PatientFName is ""
+        if (PatientFName.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Patient First Name must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+        //check if PatientLName is ""
+        if (PatientLName.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Patient Last Name must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+
+        //check if PhoneNumber is ""
+        if (PhoneNumber.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Phone Number must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+
+        //check if Email is ""
+        if (Email.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Email must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+
+        //check if BornDate is ""
+        if (BornDate.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Born Date must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+
+        if (PatientFName.value != "" && PatientLName.value != "" && PhoneNumber.value != ""  && Email.value != "" && BornDate.value != "") {
+        }
+    }
+</script>

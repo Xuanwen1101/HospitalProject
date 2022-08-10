@@ -166,7 +166,7 @@ namespace HospitalProject_Group3.Controllers
 
 
         // GET: Staff/New
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult New()
         {
             string url = "RoleData/ListRoles";
@@ -178,7 +178,7 @@ namespace HospitalProject_Group3.Controllers
 
         // POST: Staff/Create
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult Create(Staff staff)
         {
             GetApplicationCookie();//get token credentials
@@ -206,7 +206,7 @@ namespace HospitalProject_Group3.Controllers
         }
 
         // GET: Staff/Edit/5
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult Edit(int id)
         {
             UpdateStaff ViewModel = new UpdateStaff();
@@ -231,7 +231,7 @@ namespace HospitalProject_Group3.Controllers
 
         // POST: Staff/Update/5
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult Update(int id, Staff staff, HttpPostedFileBase StaffPicture)
         {
             GetApplicationCookie();//get token credentials
@@ -273,7 +273,7 @@ namespace HospitalProject_Group3.Controllers
         }
 
         // GET: Staff/DeleteConfirm/5
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult DeleteConfirm(int id)
         {
             // get the existing staff information
@@ -288,7 +288,7 @@ namespace HospitalProject_Group3.Controllers
 
         // POST: Staff/Delete/5
         [HttpPost]
-        /*[Authorize]*/
+        [Authorize]
         public ActionResult Delete(int id)
         {
             GetApplicationCookie();//get token credentials
