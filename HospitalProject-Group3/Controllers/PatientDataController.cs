@@ -75,6 +75,25 @@ namespace HospitalProject_Group3.Controllers
             return Ok(PatientDto);
         }
 
+        [HttpGet]
+        [ResponseType(typeof(PatientDto))]
+        public IHttpActionResult ListPatientsforInsurance(int id)
+        {
+            List<Patient> Patients = db.Patients.Where(
+                c => c.InsuranceID == id
+                   ).ToList();
+            List<PatientDto> PatientDtos = new List<PatientDto>();
+
+            Patients.ForEach(s => PatientDtos.Add(new PatientDto()
+            {
+                PatientID = s.PatientID,
+                PatientFName = s.PatientFName,
+                PatientLName = s.PatientLName
+            }));
+
+            return Ok(PatientDtos);
+        }
+
         // PUT: api/PatientData/UpdatePatient/5
         [ResponseType(typeof(void))]
         [HttpPost]

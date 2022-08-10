@@ -1,27 +1,81 @@
 ﻿
-@model IEnumerable<HospitalProject_Group3.Models.DonorTransplantDto>
+@model IEnumerable<HospitalProject_Group3.Models.PatientDto>
 @{
     ViewBag.Title = "New";
 }
 
 <h2>Add New Donor</h2>
 
-<form action="/DonorTransplant/Create" method="POST">
+<form action="/DonorTransplants/Create" method="POST" onsubmit="return validateDonor();">
     <div>
-        <label>Organ Type:</label> <input type="text" name="OrganType" />
+        <label>Organ Type:</label> <input type="text" id="OrganType" name="OrganType" />
     </div>
     <div>
-        <label>SurgeryPlan:</label> <input type="text" name="SurgeryPlan" />
+        <label>SurgeryPlan:</label> <input type="text" id="SurgeryPlan" name="SurgeryPlan" />
     </div>
     <div>
-        <label>WaitListNumber:</label> <input type="text" name="WaitListNumber" />
+        <label>WaitListNumber:</label> <input type="text" id="WaitListNumber" name="WaitListNumber" />
     </div>
     <div>
-        <label>Patient ID:</label> <input type="text" name="PatientID" />
+        <label>Patient ID:</label>
+        <!-- <input type="text" id="WaitListNumber" name="PatientID" /> -->
+        <select name="Donor">
+            @foreach (var Donor in Model)
+            {
+                <option value="@Donor.PatientID">@Donor.PatientFName @Donor.PatientLName</option>
+
+            }
+        </select>
     </div>
     <div>
         <input type="submit" value="Add DonorTransplant" />
 
     </div>
+
+    <div id="ErrorBox" style="display: none; color: #ec3838 "></div>
+
 </form>
 
+<script type="text/javascript">
+    //variable from HTML element
+    var OrganType = document.getElementById('OrganType');
+    var SurgeryPlan = document.getElementById('SurgeryPlan');
+    var WaitListNumber = document.getElementById('WaitListNumber');
+    var SurgeryPlan = document.getElementById('SurgeryPlan');
+
+    var errorbox = document.getElementById("ErrorBox");
+
+    function validateDonor() {
+        //check if OrganType is ""
+        if (OrganType.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Organ Type must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+        //check if SurgeryPlan is ""
+        if (SurgeryPlan.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Surgery Plan must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+
+        //check if WaitListNumber is ""
+        if (WaitListNumber.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "WaitList Number must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+
+        if (OrganType.value != "" && SurgeryPlan.value != "" && WaitListNumber.value != "") {
+        }
+    }
+</script>

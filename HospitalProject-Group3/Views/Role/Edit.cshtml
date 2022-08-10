@@ -4,15 +4,15 @@
 }
 
 <h2>Update Role</h2>
-<form action="/Role/Update/@Model.SelectedRole.RoleID" method="POST" enctype="multipart/form-data">
+<form action="/Role/Update/@Model.SelectedRole.RoleID" method="POST" enctype="multipart/form-data" onsubmit="return validateRole();>
     <div style="display:none;">
         @* Pass through the Role ID *@
-        <input type="text" name="RoleID" value="@Model.SelectedRole.RoleID" />
+        <input type="text" name="RoleID" id="RoleType" value="@Model.SelectedRole.RoleID" />
     </div>
     <div>
         <label>RoleType:</label> <input type="text" name="RoleType" value="@Model.SelectedRole.RoleType" />
     </div>
-    
+
     <div>
         <label>Department Name:</label>
         @*<input type="text" name="DepartmentID" value="@Model.SelectedRole.DepartmentID" />*@
@@ -29,7 +29,7 @@
             }
         </select>
     </div>
-    
+
     <div>
         <input type="submit" value="Update Role" />
 
@@ -39,3 +39,25 @@
     <a class="navlink" href="/Role/Details/@Model.SelectedRole.RoleID">Back to The Role's Detail</a>
 </div>
 
+<script type="text/javascript">
+    //variable from HTML element
+    var Role = document.getElementById('RoleType');
+
+    var errorbox = document.getElementById("ErrorBox");
+
+    function validateRole() {
+        //check if Role is ""
+        if (Role.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Role Type must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+
+
+        if (Role.value != "" ) {
+        }
+    }
+</script>
