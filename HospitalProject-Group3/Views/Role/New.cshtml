@@ -5,26 +5,51 @@
 
 <h2>Add New Role</h2>
 
-<form action="/Role/Create" method="POST">
+<form action="/Role/Create" method="POST" onsubmit="return validateRole();">
     <div>
-        <label>Role Type:</label> <input type="text" name="RoleType" />
+        <label>Role Type:</label> <input type="text" id="RoleType" name="RoleType" />
     </div>
-    
+
     <div>
         <label>Department:</label>
-        @*<input type="text" name="DepartmentID" />*@
-        <select name="DepartmentID">
+
+        @*<select name="DepartmentID">
             @foreach (var department in Model)
             {
                 <option value="@department.DepartmentID">@department.DepartmentName</option>
 
             }
-        </select>
+        </select>*@
     </div>
-  
+
     <div>
         <input type="submit" value="Add Role" />
 
     </div>
+
+    <div id="ErrorBox" style="display: none; color: #ec3838 "></div>
+
 </form>
 
+<script type="text/javascript">
+    //variable from HTML element
+    var Role = document.getElementById('RoleType');
+
+    var errorbox = document.getElementById("ErrorBox");
+
+    function validateRole() {
+        //check if Role is ""
+        if (Role.value === "") {
+            errorbox.style.display = 'block';
+            errorbox.innerHTML += "Role Type must be filled<br>";
+            return false;
+        } else {
+            errorbox.style.display = 'none';
+            errorbox.innerHTML = "";
+        }
+ 
+
+        if (Role.value != "" ) {
+        }
+    }
+</script>

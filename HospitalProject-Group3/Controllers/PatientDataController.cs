@@ -11,7 +11,6 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using HospitalProject_Group3.Models;
-using System.Diagnostics;
 
 namespace HospitalProject_Group3.Controllers
 {
@@ -75,6 +74,25 @@ namespace HospitalProject_Group3.Controllers
             return Ok(PatientDto);
         }
 
+        [HttpGet]
+        [ResponseType(typeof(PatientDto))]
+        public IHttpActionResult ListPatientsforInsurance(int id)
+        {
+            List<Patient> Patients = db.Patients.Where(
+                c => c.InsuranceID == id
+                   ).ToList();
+            List<PatientDto> PatientDtos = new List<PatientDto>();
+
+            Patients.ForEach(s => PatientDtos.Add(new PatientDto()
+            {
+                PatientID = s.PatientID,
+                PatientFName = s.PatientFName,
+                PatientLName = s.PatientLName
+            }));
+
+            return Ok(PatientDtos);
+        }
+
         // PUT: api/PatientData/UpdatePatient/5
         [ResponseType(typeof(void))]
         [HttpPost]
@@ -90,13 +108,7 @@ namespace HospitalProject_Group3.Controllers
                 return BadRequest();
             }
 
-            /*Debug.WriteLine(id);
-            Debug.WriteLine(patient);*/
-
             db.Entry(patient).State = EntityState.Modified;
-            // Picture update is handled by another method
-            db.Entry(patient).Property(m => m.PatientHasPhoto).IsModified = false;
-            db.Entry(patient).Property(m => m.PicExtension).IsModified = false;
 
             try
             {
@@ -116,38 +128,6 @@ namespace HospitalProject_Group3.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-        /*public IHttpActionResult UpdatePatient(int id, Patient patient)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != patient.PatientID)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(patient).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PatientExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }*/
 
         // POST: api/PatientData/AddPatient
         [ResponseType(typeof(Patient))]

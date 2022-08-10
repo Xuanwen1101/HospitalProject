@@ -9,7 +9,7 @@
     <a class="navlink" href="/Insurance/List">Back To Insurances' List</a>
 </div>
 <div>
-    <a style="color: #ec3838;" href="/Insurance/DeleteConfirm/@Model.SelectedInsurance.InsuranceID"> Delete This Insurance</a>
+    <a style="color: #ec3838;" href="/Insurance/DeleteConfirm/@Model.SelectedInsurance.InsuranceID">Delete This Insurance</a>
 </div>
 <div>
     <a style="color: #8338ec;" href="/Insurance/Edit/@Model.SelectedInsurance.InsuranceID">Update This Insurance</a>
@@ -22,11 +22,11 @@
 
     <div>
         <h3>Patient has <span style="color: #0a9396 ">@Model.SelectedInsurance.InsuranceCompany</span> with @Model.SelectedInsurance.InsurancePlan :</h3>
-        @*@foreach (var appointment in Model.HadAppointments)
+        @foreach (var patient in Model.ListPatient)
             {
                 <div>
-                    <a href="/Staff/Details/@appointment.AppointmentID">@appointment.AppointmentID</a>
+                    <a href="/Patient/Details/@patient.PatientID">@patient.PatientFName @patient.PatientLName</a>
                 </div>
-            }*@
+            }
     </div>
 </div>

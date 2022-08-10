@@ -80,6 +80,14 @@ namespace HospitalProject_Group3.Controllers
             InsuranceDto SelectedInsurance = response.Content.ReadAsAsync<InsuranceDto>().Result;
 
             ViewModel.SelectedInsurance = SelectedInsurance;
+
+            //show associated Patient with this Insurance
+            url = "PatientData/ListPatientsforInsurance/" + id;
+            response = client.GetAsync(url).Result;
+            IEnumerable<PatientDto> listpatients = response.Content.ReadAsAsync<IEnumerable<PatientDto>>().Result;
+
+            ViewModel.ListPatient = listpatients;
+
             return View(ViewModel);
         }
 
@@ -149,6 +157,7 @@ namespace HospitalProject_Group3.Controllers
             HttpContent content = new StringContent(jsonPayload);
             content.Headers.ContentType.MediaType = "application/json";
             HttpResponseMessage response = client.PostAsync(url, content).Result;
+            Debug.WriteLine(content);
 
             //update request is successful, and we have image data
             if (response.IsSuccessStatusCode)
@@ -166,16 +175,14 @@ namespace HospitalProject_Group3.Controllers
         /*[Authorize]*/
         public ActionResult DeleteConfirm(int id)
         {
-            // get the existing Insurance information
+            // get the existing role information
             //curl https://localhost:44342/api/InsuranceData/FindInsurance/{id}
             string url = "InsuranceData/FindInsurance" + id;
-            HttpResponseMessage response = client.GetAsync(url).Result; 
-            
-            string url = "InsuranceData/FindInsurance/" + id;
-
             HttpResponseMessage response = client.GetAsync(url).Result;
             InsuranceDto selectedInsurance = response.Content.ReadAsAsync<InsuranceDto>().Result;
+
             return View(selectedInsurance);
+
         }
 
         // POST: Insurance/Delete/5
@@ -187,6 +194,7 @@ namespace HospitalProject_Group3.Controllers
             //objective: delete the selected Insurance from our system using the API
             //curl -d "" https://localhost:44342/api/InsuranceData/DeleteInsurance/{id}
             string url = "InsuranceData/DeleteInsurance/" + id;
+
             HttpContent content = new StringContent("");
             content.Headers.ContentType.MediaType = "application/json";
             HttpResponseMessage response = client.PostAsync(url, content).Result;
