@@ -168,6 +168,90 @@ namespace HospitalProject_Group3.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }*/
 
+        /// <summary>
+        /// Receives patient picture data, uploads it to the webserver and updates the patient's HasPic option
+        /// </summary>
+        /// <param name="id">the patient id</param>
+        /// <returns>status code 200 if successful.</returns>
+        /// <example>
+        /// curl -F PatientPicture=@file.jpg "https://localhost:44342/api/PatientData/UploadPatientPicture/5"
+        /// POST: api/PatientData/UploadPatientPicture/5
+        /// HEADER: enctype=multipart/form-data
+        /// FORM-DATA: image
+        /// </example>
+        /// https://stackoverflow.com/questions/28369529/how-to-set-up-a-web-api-controller-for-multipart-form-data
+
+        [HttpPost]
+        public IHttpActionResult UploadPatientPicture(int id)
+        {
+
+            bool haspic = false;
+            string picextension;
+            if (Request.Content.IsMimeMultipartContent())
+            {
+                //Debug.WriteLine("Received multipart form data.");
+
+                int numfiles = HttpContext.Current.Request.Files.Count;
+                //Debug.WriteLine("Files Received: " + numfiles);
+
+                //Check if a file is posted
+                if (numfiles == 1 && HttpContext.Current.Request.Files[0] != null)
+                {
+                    var patientPicture = HttpContext.Current.Request.Files[0];
+                    //Check if the file is empty
+                    if (patientPicture.ContentLength > 0)
+                    {
+                        //establish valid file types (can be changed to other file extensions if desired!)
+                        var valtypes = new[] { "jpeg", "jpg", "png", "gif" };
+                        var extension = Path.GetExtension(patientPicture.FileName).Substring(1);
+                        //Check the extension of the file
+                        if (valtypes.Contains(extension))
+                        {
+                            try
+                            {
+                                //file name is the id of the image
+                                string fn = id + "." + extension;
+
+                                //get a direct file path to ~/Content/Images/Patients/{id}.{extension}
+                                string path = Path.Combine(HttpContext.Current.Server.MapPath("~/Content/Images/Patients/"), fn);
+
+                                //save the file
+                                patientPicture.SaveAs(path);
+
+                                //if these are all successful then we can set these fields
+                                haspic = true;
+                                picextension = extension;
+
+                                //Update the patient haspic and picextension fields in the database
+                                Patient SelectedPatient = db.Patients.Find(id);
+                                SelectedPatient.PatientHasPhoto = haspic;
+                                SelectedPatient.PicExtension = extension;
+                                db.Entry(SelectedPatient).State = EntityState.Modified;
+
+                                db.SaveChanges();
+
+                            }
+                            catch (Exception ex)
+                            {
+                                Debug.WriteLine("Patient Image was not saved successfully.");
+                                Debug.WriteLine("Exception:" + ex);
+                                return BadRequest();
+                            }
+                        }
+                    }
+
+                }
+
+                return Ok();
+            }
+            else
+            {
+                //not multipart form data
+                return BadRequest();
+            }
+        }
+
+
         // POST: api/PatientData/AddPatient
         [ResponseType(typeof(Patient))]
         [HttpPost]

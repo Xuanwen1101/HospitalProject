@@ -26,7 +26,7 @@
         }
     }
     <div><img src="@imageurl" width="300" alt="@Model.SelectedStaff.StaffFName @Model.SelectedStaff.StaffLName" /></div>
-    <div><label>Bio:</label> @Model.SelectedStaff.StaffBio</div>
+    <div><label>Bio:</label> @Html.Raw(@Model.SelectedStaff.StaffBio)</div>
     <div><label>Hire Date:</label> @Model.SelectedStaff.HireDate.ToString("yyyy-MM-dd")</div>
     <div><label>PhoneNumber:</label> @Model.SelectedStaff.PhoneNumber</div>
     <div><label>Email:</label> @Model.SelectedStaff.Email</div>

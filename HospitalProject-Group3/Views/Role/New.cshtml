@@ -12,14 +12,12 @@
 
     <div>
         <label>Department:</label>
-
-        @*<select name="DepartmentID">
+        @*<input type="text" name="DepartmentID" />*@
+        <select name="DepartmentID">
             @foreach (var department in Model)
             {
-                <option value="@department.DepartmentID">@department.DepartmentName</option>
-
-            }
-        </select>*@
+            <option value="@department.DepartmentID">@department.DepartmentName</option>            }
+        </select>
     </div>
 
     <div>

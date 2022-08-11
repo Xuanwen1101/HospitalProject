@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -13,7 +14,7 @@ namespace HospitalProject_Group3.Models
         public int StaffID { get; set; }
         public string StaffFName { get; set; }
         public string StaffLName { get; set; }
-
+        [AllowHtml]
         public string StaffBio { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
@@ -43,7 +44,7 @@ namespace HospitalProject_Group3.Models
         public int StaffID { get; set; }
         public string StaffFName { get; set; }
         public string StaffLName { get; set; }
-
+        [AllowHtml]
         public string StaffBio { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }

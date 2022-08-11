@@ -7,10 +7,10 @@
 <form action="/Role/Update/@Model.SelectedRole.RoleID" method="POST" enctype="multipart/form-data" onsubmit="return validateRole();>
     <div style="display:none;">
         @* Pass through the Role ID *@
-        <input type="text" name="RoleID" id="RoleType" value="@Model.SelectedRole.RoleID" />
+        <input style="display:none;" type="text" name="RoleID" value="@Model.SelectedRole.RoleID" />
     </div>
     <div>
-        <label>RoleType:</label> <input type="text" name="RoleType" value="@Model.SelectedRole.RoleType" />
+        <label>RoleType:</label> <input type="text" name="RoleType" id="RoleType" value="@Model.SelectedRole.RoleType" />
     </div>
 
     <div>
@@ -41,13 +41,13 @@
 
 <script type="text/javascript">
     //variable from HTML element
-    var Role = document.getElementById('RoleType');
+    var RoleType = document.getElementById('RoleType');
 
     var errorbox = document.getElementById("ErrorBox");
 
     function validateRole() {
         //check if Role is ""
-        if (Role.value === "") {
+        if (RoleType.value === "") {
             errorbox.style.display = 'block';
             errorbox.innerHTML += "Role Type must be filled<br>";
             return false;
@@ -57,7 +57,7 @@
         }
 
 
-        if (Role.value != "" ) {
+        if (Role.value != "") {
         }
     }
 </script>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,6 +12,8 @@ namespace HospitalProject_Group3.Models
     {
         [Key]
         public int RecordID { get; set; }
+
+        [AllowHtml]
         public string RecordDetail { get; set; }
         public DateTime RecordDate { get; set; }
 
@@ -24,6 +27,8 @@ namespace HospitalProject_Group3.Models
     public class MedicalRecordDto
     {
         public int RecordID { get; set; }
+
+        [AllowHtml]
         public string RecordDetail { get; set; }
         public DateTime RecordDate { get; set; }
 
