@@ -8,7 +8,6 @@
 <form action="/Bill/Create" method="POST" onsubmit="return validateBill();">
     <div>
         <label>Patient ID:</label>
-        <!-- <input type="number" name="PatientID" /> -->
         <select name="PatientID">
             @foreach (var Patient in Model)
             {

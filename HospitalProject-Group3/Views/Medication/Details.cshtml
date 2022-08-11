@@ -20,6 +20,6 @@
 <div id="containershow">
     <h2 style="color: #0a9396 ">@Model.SelectedMedication.MedicationBrand -  @Model.SelectedMedication.MedicationName</h2>
   
-    <div><label>Detail:</label> @Model.SelectedMedication.MedicationDetail</div>
+    <div><label>Detail:</label> @Html.Raw(@Model.SelectedMedication.MedicationDetail)</div>
     <div><label>Price:</label> @Model.SelectedMedication.Price</div>
 </div>

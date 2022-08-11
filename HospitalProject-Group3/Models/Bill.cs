@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,6 +12,8 @@ namespace HospitalProject_Group3.Models
     {
         [Key]
         public int BillID { get; set; }
+
+        [AllowHtml]
         public string BillDetail { get; set; }
         public decimal TotalCost { get; set; }
 
@@ -23,6 +26,8 @@ namespace HospitalProject_Group3.Models
     public class BillDto
     {
         public int BillID { get; set; }
+
+        [AllowHtml]
         public string BillDetail { get; set; }
         public decimal TotalCost { get; set; }
 

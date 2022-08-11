@@ -61,7 +61,12 @@ namespace HospitalProject_Group3.Controllers
         // GET: Bill/New
         public ActionResult New()
         {
-            return View();
+            string url = "PatientData/ListPatients";
+            HttpResponseMessage response = client.GetAsync(url).Result;
+            IEnumerable<PatientDto> PatientOptions = response.Content.ReadAsAsync<IEnumerable<PatientDto>>().Result;
+
+            return View(PatientOptions);
+            /*return View();*/
         }
 
         // POST: Bill/Create
