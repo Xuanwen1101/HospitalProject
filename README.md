@@ -157,6 +157,10 @@ curl -F StaffPicture=@file.jpg https://localhost:44342/api/StaffData/UploadStaff
 - Manage Staff (CRUD) - Xuanwen
 - Manage Relationship between Shift and Staff - Xuanwen
 - User Authentication - Deisy
+- Form Validation by JavaScript - Deisy
+- Image Uploading - Xuanwen
+- Tiny MCE Editor Plugin - Xuanwen
+- Auto-generated Documentation - Xuanwen
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
