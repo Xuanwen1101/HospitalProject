@@ -17,7 +17,10 @@ namespace HospitalProject_Group3.Controllers
     public class PatientDataController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        /// <summary>
+        /// list patient
+        /// </summary>
+        /// <returns>returns all patients details in the system</returns>
         // GET: api/PatientData/ListPatients
         [HttpGet]
         public IEnumerable<PatientDto> ListPatients()
@@ -44,7 +47,11 @@ namespace HospitalProject_Group3.Controllers
 
             return PatientDtos;
         }
-
+        /// <summary>
+        /// searches for patient with patient id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>requested patient info</returns>
         // GET: api/PatientData/FindPatient/5
         [ResponseType(typeof(Patient))]
         [HttpGet]
@@ -73,7 +80,12 @@ namespace HospitalProject_Group3.Controllers
 
             return Ok(PatientDto);
         }
-
+        /// <summary>
+        /// changes to the patient info
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="patient"></param>
+        /// <returns></returns>
         // PUT: api/PatientData/UpdatePatient/5
         [ResponseType(typeof(void))]
         [HttpPost]
@@ -109,6 +121,11 @@ namespace HospitalProject_Group3.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
+        /// <summary>
+        /// add new patient details
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <returns></returns>
 
         // POST: api/PatientData/AddPatient
         [ResponseType(typeof(Patient))]
@@ -125,7 +142,11 @@ namespace HospitalProject_Group3.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = patient.PatientID }, patient);
         }
-
+        /// <summary>
+        /// deletes patient detail from database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // POST: api/PatientData/DeletePatient/5
         [ResponseType(typeof(Patient))]
         [HttpPost]

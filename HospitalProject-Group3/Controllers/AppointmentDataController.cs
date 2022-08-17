@@ -15,7 +15,10 @@ namespace HospitalProject_Group3.Controllers
     public class AppointmentDataController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        /// <summary>
+        ///  Displays booked appointments
+        /// </summary>
+        /// <returns></returns>
         // GET: api/AppointmentData/ListAppointment
         [HttpGet]
         public IEnumerable<AppointmentDto> ListAppointments()
@@ -39,7 +42,11 @@ namespace HospitalProject_Group3.Controllers
 
             return AppointmentDtos;
         }
-
+        /// <summary>
+        /// Gets a particular appointment based on id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: api/AppointmentData/FindAppointment/5
         [ResponseType(typeof(Appointment))]
         [HttpGet]
@@ -66,7 +73,12 @@ namespace HospitalProject_Group3.Controllers
 
             return Ok(AppointmentDto);
         }
-
+        /// <summary>
+        /// updates a specific appointment info
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="appointment"></param>
+        /// <returns></returns>
         // PUT: api/AppointmentData/UpdateAppointment/5
         [ResponseType(typeof(void))]
         [HttpPost]
@@ -102,7 +114,11 @@ namespace HospitalProject_Group3.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
+        /// <summary>
+        /// creates new appointment booking
+        /// </summary>
+        /// <param name="appointment"></param>
+        /// <returns></returns>
         // POST: api/AppointmentData/AddAppointment
         [ResponseType(typeof(Appointment))]
         [HttpPost]
@@ -118,7 +134,11 @@ namespace HospitalProject_Group3.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = appointment.AppointmentID }, appointment);
         }
-
+        /// <summary>
+        /// deletes aspecific appointment
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // POST: api/AppointmentData/DeleteAppointment/5
         [ResponseType(typeof(Appointment))]
         [HttpPost]

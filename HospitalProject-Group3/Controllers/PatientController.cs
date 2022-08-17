@@ -22,7 +22,11 @@ namespace HospitalProject_Group3.Controllers
             {
                 client = new HttpClient();
                 client.BaseAddress = new Uri("https://localhost:44342/api/");
-            }
+            }/// <summary>
+            /// This is to list patients in the database
+            /// </summary>
+           
+            /// <returns>all</returns>
             // GET: Patient/List
             public ActionResult List()
             {
@@ -40,7 +44,11 @@ namespace HospitalProject_Group3.Controllers
 
                 return View(patients);
             }
-
+        /// <summary>
+        /// gets patient by it's id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>patient with id number</returns>
         // GET: Patient/Details/5
         public ActionResult Details(int id)
         {
@@ -59,13 +67,20 @@ namespace HospitalProject_Group3.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// creating new patient
+        /// </summary>
+        /// <returns></returns>
         // GET: Patient/New
         public ActionResult New()
         {
             return View();
         }
-
+        /// <summary>
+        /// creating a new patient
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <returns>sends new patient info to database</returns>
         // POST: Patient/Create
         [HttpPost]
         public ActionResult Create(Patient patient)
@@ -91,7 +106,11 @@ namespace HospitalProject_Group3.Controllers
             }
 
         }
-
+        /// <summary>
+        /// makes changes to patient info based on provided id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>changed patient info</returns>
         // GET: Patient/Edit/5
         public ActionResult Edit(int id)
         {
@@ -107,7 +126,12 @@ namespace HospitalProject_Group3.Controllers
 
             return View(selectedpatient);
         }
-
+        /// <summary>
+        /// changes old patient record to new patient info
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="patient"></param>
+        /// <returns></returns>
         // POST: Patient/Update/5
         [HttpPost]
         public ActionResult Update(int id, Patient patient)
@@ -136,7 +160,11 @@ namespace HospitalProject_Group3.Controllers
                     return RedirectToAction("Error");
                 }
         }
-
+        /// <summary>
+        /// confirm if one ones to delete patient with id number from database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: Patient/Delete/5
         
         public ActionResult DeleteConfirm(int id)
@@ -152,6 +180,11 @@ namespace HospitalProject_Group3.Controllers
 
             return View(selectedpatient);
         }
+        /// <summary>
+        /// deleting patient with id from database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
 
         // POST: Patient/Delete/5
         [HttpPost]

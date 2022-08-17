@@ -16,7 +16,10 @@ namespace HospitalProject_Group3.Controllers
     public class BillDataController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        /// <summary>
+        /// list bills
+        /// </summary>
+        /// <returns>returns the bills</returns>
         // GET: api/BillData/ListBills
         [HttpGet]
         public IEnumerable<BillDto> ListBills()
@@ -37,7 +40,11 @@ namespace HospitalProject_Group3.Controllers
 
             return BillDtos;
         }
-
+        /// <summary>
+        /// find a particular bill using id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>returns a specific bill based on id</returns>
         // GET: api/BillData/FindBill/5
         [ResponseType(typeof(Bill))]
         [HttpGet]
@@ -61,7 +68,12 @@ namespace HospitalProject_Group3.Controllers
 
             return Ok(BillDto);
         }
-
+        /// <summary>
+        /// changes bill records
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="bill"></param>
+        /// <returns>updated bill</returns>
         // PUT: api/BillData/UpdateBill/5
         [ResponseType(typeof(void))]
         [HttpPost]
@@ -101,7 +113,11 @@ namespace HospitalProject_Group3.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
+        /// <summary>
+        /// creates new bill
+        /// </summary>
+        /// <param name="bill"></param>
+        /// <returns></returns>
         // POST: api/BillData/AddBill
         [ResponseType(typeof(Bill))]
         [HttpPost]
@@ -117,7 +133,11 @@ namespace HospitalProject_Group3.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = bill.BillID }, bill);
         }
-
+        /// <summary>
+        /// Deletes a specific bill based on id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // POST: api/BillData/DeleteBill/5
         [ResponseType(typeof(Bill))]
         [HttpPost]
